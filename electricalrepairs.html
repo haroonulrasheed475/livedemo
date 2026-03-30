@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAA Electrical Services | Sacramento's Trusted Electricians</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B00;
+            --primary-dark: #E55A00;
+            --secondary: #1A1A2E;
+            --accent: #FFD700;
+            --light: #F8F9FA;
+            --dark: #0F0F1A;
+            --success: #00C853;
+            --gradient-1: linear-gradient(135deg, #FF6B00 0%, #FF8C00 100%);
+            --gradient-2: linear-gradient(135deg, #1A1A2E 0%, #2D2D44 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--dark);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,107,0,0.1) 0%, transparent 50%),
+                        radial-gradient(circle, rgba(255,215,0,0.05) 30%, transparent 60%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(15, 15, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,107,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .logo i {
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta-btn {
+            background: var(--gradient-1);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,0,0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255,107,0,0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,107,0,0.1);
+            border: 1px solid rgba(255,107,0,0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--accent);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--gradient-2);
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid rgba(255,107,0,0.2);
+            border-bottom: 1px solid rgba(255,107,0,0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 5%;
+            background: var(--secondary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,107,0,0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 0;
+        }
+
+        .service-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255,107,0,0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card p {
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .why-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .why-image {
+            position: relative;
+        }
+
+        .why-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--gradient-1);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255,107,0,0.3);
+        }
+
+        .experience-badge .years {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .experience-badge .text {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .why-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .features-list i {
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background: var(--gradient-1);
+            padding: 4rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emergency-banner::before {
+            content: '⚡';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .emergency-banner h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .emergency-banner p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .phone-number {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: #fff;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .phone-number:hover {
+            transform: scale(1.05);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 5%;
+            background: var(--secondary);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--primary);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .stars {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+        }
+
+        .author-info p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Chatbot Widget */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .chatbot-toggle {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,107,0,0.4);
+            transition: all 0.3s;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-toggle i {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .chatbot-container {
+            position: absolute;
+            bottom: 90px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background: var(--secondary);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,107,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-container.active {
+            display: flex;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-header {
+            background: var(--gradient-1);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .chatbot-header .status {
+            width: 10px;
+            height: 10px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 1rem;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .message.bot {
+            background: rgba(255,107,0,0.1);
+            border: 1px solid rgba(255,107,0,0.2);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user {
+            background: var(--gradient-1);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input {
+            padding: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            padding: 0.8rem 1.2rem;
+            color: #fff;
+            outline: none;
+        }
+
+        .chatbot-input input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .send-btn {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid rgba(255,107,0,0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.4);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,107,0,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 10rem;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 100%;
+                margin-top: 3rem;
+            }
+
+            .why-container {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-badge {
+                right: 20px;
+                bottom: -10px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .chatbot-container {
+                width: calc(100vw - 40px);
+                right: -10px;
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <i class="fas fa-bolt"></i>
+            AAA Electrical Services
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#why-us">Why Us</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="tel:916-555-0100" class="cta-btn">
+            <i class="fas fa-phone"></i> Call Now
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                BBB A+ Rated & Fully Licensed
+            </div>
+            <h1>Sacramento's Most <span>Trusted</span> Electricians</h1>
+            <p>Licensed, state-certified technicians delivering same-day service with 100% satisfaction guaranteed. From emergency repairs to complete electrical upgrades, we power your peace of mind.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="cta-btn">Get Free Estimate</a>
+                <a href="#services" class="btn-secondary">Our Services</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800" alt="Professional Electrician at Work">
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">93%</div>
+            <div class="stat-label">Repairs On The Spot</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Emergency Service</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Satisfaction Guaranteed</div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header scroll-reveal">
+            <h2>Comprehensive Electrical Services</h2>
+            <p>From minor repairs to major installations, our warehouse-on-wheels ensures fast, reliable service</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card scroll-reveal">
+                <div class="service-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Emergency Repairs</h3>
+                <p>24/7 emergency electrical services for power outages, sparking outlets, burning smells, and electrical hazards. Same-day response guaranteed.</p>
+            </div>
+            <div class="service-card scroll-reveal">
+                <div class="service-icon">
+                    <i class="fas fa-car-battery"></i>
+                </div>
+                <h3>Panel Upgrades</h3>
+                <p>Modernize your electrical panel to handle today's power demands. Safe, code-compliant installations with upfront pricing.</p>
+            </div>
+            <div class="service-card scroll-reveal">
+                <div class="service-icon">
+                    <i class="fas fa-charging-station"></i>
+                </div>
+                <h3>EV Charger Install</h3>
+                <p>Home EV charging solutions installed by certified professionals. Fast, efficient charging for all electric vehicle models.</p>
+            </div>
+            <div class="service-card scroll-reveal">
+                <div class="service-icon">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <h3>Solar Maintenance</h3>
+                <p>Optimize your solar panel performance year-round. Professional cleaning, inspection, and repair services.</p>
+            </div>
+            <div class="service-card scroll-reveal">
+                <div class="service-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Surge Protection</h3>
+                <p>Whole-home surge protection systems to safeguard your valuable electronics and appliances from power spikes.</p>
+            </div>
+            <div class="service-card scroll-reveal">
+                <div class="service-icon">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <h3>Safety Inspections</h3>
+                <p>Comprehensive electrical safety inspections for home sales, insurance requirements, or peace of mind.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us" id="why-us">
+        <div class="why-container">
+            <div class="why-image scroll-reveal">
+                <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800" alt="Electrical Panel Work">
+                <div class="experience-badge">
+                    <div class="years">15+</div>
+                    <div class="text">Years of<br>Excellence</div>
+                </div>
+            </div>
+            <div class="why-content scroll-reveal">
+                <h2>Why Sacramento Chooses AAA</h2>
+                <p>We're not just electricians – we're your neighbors committed to keeping Sacramento homes safe and powered. Our family safety-first approach means background-checked, drug-tested technicians who treat your home with respect.</p>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> Licensed & State-Certified Technicians</li>
+                    <li><i class="fas fa-check-circle"></i> Background-Checked & Drug-Tested Staff</li>
+                    <li><i class="fas fa-check-circle"></i> "Clean Home Certified" – We Respect Your Space</li>
+                    <li><i class="fas fa-check-circle"></i> Warehouse on Wheels – Most Repairs Done On-Spot</li>
+                    <li><i class="fas fa-check-circle"></i> Clear Upfront Pricing – No Hidden Fees</li>
+                    <li><i class="fas fa-check-circle"></i> Flexible Financing Available</li>
+                </ul>
+                <a href="#contact" class="cta-btn" style="margin-top: 2rem;">Schedule Service</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Banner -->
+    <section class="emergency-banner">
+        <h2><i class="fas fa-exclamation-triangle"></i> Electrical Emergency?</h2>
+        <p>Don't wait until it's too late. Our 24/7 emergency team is standing by with same-day service.</p>
+        <a href="tel:916-555-0100" class="phone-number">
+            <i class="fas fa-phone-alt"></i>
+            (916) 555-0100
+        </a>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header scroll-reveal">
+            <h2>What Our Customers Say</h2>
+            <p>Join thousands of satisfied Sacramento homeowners</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card scroll-reveal">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">AAA Electrical saved us during a complete power outage on a Sunday night. The technician arrived within an hour, diagnosed the panel issue, and had us back online before bedtime. Professional, clean, and fairly priced!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SM</div>
+                    <div class="author-info">
+                        <h4>Sarah Mitchell</h4>
+                        <p>East Sacramento</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card scroll-reveal">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">Had our EV charger installed last week. The team was knowledgeable about different charger types and helped us choose the best option for our Tesla. Installation was clean and they even cleaned up better than they found it!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JR</div>
+                    <div class="author-info">
+                        <h4>James Rodriguez</h4>
+                        <p>Elk Grove</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card scroll-reveal">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">We've used AAA for both our home and business electrical needs for 3 years now. Their membership program saves us money, and the technicians are always punctual, professional, and thorough. Highly recommend!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">LC</div>
+                    <div class="author-info">
+                        <h4>Linda Chen</h4>
+                        <p>Roseville</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-bolt"></i> AAA Electrical Services</h3>
+                <p>Sacramento's trusted electrical experts since 2009. Licensed, insured, and committed to your family's safety.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-yelp"></i></a>
+                    <a href="#"><i class="fab fa-google"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#services">Services</a><br>
+                <a href="#why-us">Why Choose Us</a><br>
+                <a href="#testimonials">Reviews</a><br>
+                <a href="#">Financing Options</a><br>
+                <a href="#">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 1234 Power Ave, Sacramento, CA 95814</p>
+                <p><i class="fas fa-phone"></i> (916) 555-0100</p>
+                <p><i class="fas fa-envelope"></i> service@aaaes.com</p>
+                <p><i class="fas fa-clock"></i> 24/7 Emergency Service</p>
+            </div>
+            <div class="footer-section">
+                <h3>Service Areas</h3>
+                <p>Sacramento • Elk Grove • Roseville • Folsom • Davis • Citrus Heights • Rancho Cordova • And surrounding areas</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AAA Electrical Services. All rights reserved. | CA License #C10-123456</p>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Widget -->
+    <div class="chatbot-widget">
+        <div class="chatbot-container" id="chatbot">
+            <div class="chatbot-header">
+                <h3>
+                    <i class="fas fa-robot"></i>
+                    AAA AI Assistant
+                    <span class="status"></span>
+                </h3>
+                <button class="close-chat" onclick="toggleChat()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot">
+                    👋 Hi! I'm your AAA Electrical virtual assistant. I can help you with:
+                    <br><br>
+                    • Scheduling service appointments<br>
+                    • Emergency electrical guidance<br>
+                    • Service pricing information<br>
+                    • EV charger recommendations<br>
+                    • Solar maintenance questions<br>
+                    <br>
+                    How can I help you today?
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="userInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                <button class="send-btn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <div class="chatbot-toggle" onclick="toggleChat()">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+    </div>
+
+    <script>
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+
+        // Chatbot Functions
+        function toggleChat() {
+            const chatbot = document.getElementById('chatbot');
+            chatbot.classList.toggle('active');
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const messages = document.getElementById('chatMessages');
+            const text = input.value.trim();
+
+            if (text) {
+                // Add user message
+                const userMsg = document.createElement('div');
+                userMsg.className = 'message user';
+                userMsg.textContent = text;
+                messages.appendChild(userMsg);
+                
+                input.value = '';
+                messages.scrollTop = messages.scrollHeight;
+
+                // Simulate AI response
+                setTimeout(() => {
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'message bot';
+                    botMsg.innerHTML = getAIResponse(text);
+                    messages.appendChild(botMsg);
+                    messages.scrollTop = messages.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        function getAIResponse(input) {
+            const lower = input.toLowerCase();
+            
+            if (lower.includes('emergency') || lower.includes('power outage') || lower.includes('spark')) {
+                return "🚨 For electrical emergencies, please call us immediately at <strong>(916) 555-0100</strong>. Our 24/7 emergency team typically arrives within 1-2 hours. In the meantime:<br><br>• Turn off the main breaker if safe<br>• Keep away from sparking outlets<br>• Don't use water on electrical fires";
+            }
+            else if (lower.includes('price') || lower.includes('cost') || lower.includes('quote')) {
+                return "💰 We offer transparent, flat-rate pricing with no hidden fees. Emergency rates range $100-150/hour, but we provide exact quotes before starting any work. Would you like me to connect you with our scheduling team for a free estimate?";
+            }
+            else if (lower.includes('ev') || lower.includes('charger') || lower.includes('tesla')) {
+                return "⚡ We install all major EV charger brands including Tesla Wall Connector, ChargePoint, and JuiceBox. Installation typically takes 3-4 hours and includes permits. We can help you choose the right amperage for your vehicle. Interested in scheduling an installation?";
+            }
+            else if (lower.includes('solar') || lower.includes('panel clean')) {
+                return "☀️ Our solar maintenance includes panel cleaning, inverter checks, and performance optimization. We recommend annual maintenance to maintain peak efficiency. We service all solar brands and can work with your existing installer warranties.";
+            }
+            else if (lower.includes('appointment') || lower.includes('schedule') || lower.includes('book')) {
+                return "📅 I'd be happy to help schedule your service! We offer same-day service for most repairs. Please provide:<br><br>• Your name and address<br>• Type of service needed<br>• Preferred date/time<br><br>Or call us directly at (916) 555-0100 for immediate scheduling!";
+            }
+            else if (lower.includes('hour') || lower.includes('time') || lower.includes('when')) {
+                return "🕐 We provide 24/7 emergency service! Regular hours are 7am-7pm, 7 days a week. Emergency services are available round-the-clock with no extra charges for after-hours calls during emergencies.";
+            }
+            else if (lower.includes('license') || lower.includes('certified') || lower.includes('insured')) {
+                return "✅ Yes! We are fully licensed (CA C10 #123456), insured, and all technicians are background-checked and drug-tested. We're also BBB A+ rated with 100% satisfaction guarantee.";
+            }
+            else {
+                return "Thank you for reaching out! For the most accurate assistance, could you tell me more about what type of electrical service you need? Or feel free to call us at <strong>(916) 555-0100</strong> to speak directly with our team!";
+            }
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(15, 15, 26, 0.95)';
+            } else {
+                nav.style.background = 'rgba(15, 15, 26, 0.8)';
+            }
+        });
+    </script>
+</body>
+</html>
