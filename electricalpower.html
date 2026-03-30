@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical Power Source Inc. | Central Valley's Premier Electricians</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #f6ad55;
+            --accent-hover: #ed8936;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(246, 173, 85, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 0 5%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(246, 173, 85, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            color: white;
+            z-index: 2;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(246, 173, 85, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-card.left {
+            left: -50px;
+            bottom: 100px;
+            animation-delay: 0.5s;
+        }
+
+        .floating-card.right {
+            right: -30px;
+            top: 50px;
+        }
+
+        .floating-card i {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .floating-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .floating-card p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .service-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .service-content p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 5%;
+            background: linear-gradient(to right, var(--primary) 50%, var(--light) 50%);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content {
+            color: white;
+            padding-right: 3rem;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .founders {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .founder {
+            text-align: center;
+        }
+
+        .founder-img {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .founder-img i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .founder h4 {
+            font-size: 1rem;
+        }
+
+        .founder span {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            background: var(--accent);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(246, 173, 85, 0.3);
+        }
+
+        .experience-badge .years {
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            background: var(--light);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .feature p {
+            color: var(--gray);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 5%;
+            background: var(--primary);
+            color: white;
+        }
+
+        .testimonials .section-header h2 {
+            color: white;
+        }
+
+        .testimonials .section-header p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial {
+            background: rgba(255,255,255,0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .author-avatar i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+        }
+
+        .author-info span {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 5%;
+            background: var(--light);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info > p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-item div h4 {
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item div p {
+            color: var(--gray);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            opacity: 0.7;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.6;
+        }
+
+        /* AI Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .chatbot-toggle {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(246, 173, 85, 0.4);
+            transition: all 0.3s;
+            animation: pulse-btn 2s infinite;
+        }
+
+        @keyframes pulse-btn {
+            0%, 100% { box-shadow: 0 10px 30px rgba(246, 173, 85, 0.4); }
+            50% { box-shadow: 0 10px 40px rgba(246, 173, 85, 0.6); }
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-toggle i {
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 90px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chatbot-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-header h4 i {
+            color: var(--accent);
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.bot {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .bot-avatar {
+            width: 35px;
+            height: 35px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bot-avatar i {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .message-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            max-width: 80%;
+        }
+
+        .message.bot .message-content {
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .message.user .message-content {
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .chat-input input:focus {
+            border-color: var(--accent);
+        }
+
+        .send-btn {
+            width: 45px;
+            height: 45px;
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            background: var(--accent-hover);
+            transform: scale(1.1);
+        }
+
+        .quick-replies {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .quick-reply {
+            background: rgba(246, 173, 85, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-reply:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 3rem;
+            }
+
+            .hero-content {
+                order: 2;
+            }
+
+            .hero-image {
+                order: 1;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                background: var(--primary);
+            }
+
+            .about-content {
+                padding-right: 0;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .chatbot-window {
+                width: 90vw;
+                right: -20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <i class="fas fa-bolt"></i>
+            Electrical Power Source
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#why-us">Why Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="tel:5592109405" class="nav-cta">
+            <i class="fas fa-phone"></i> (559) 210-9405
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                Central Valley's Trusted Electricians Since 2007
+            </div>
+            <h1>Powering Your Future With Excellence</h1>
+            <p>From residential repairs to commercial installations, we deliver cutting-edge electrical solutions with an unwavering commitment to quality and safety.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">18+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Projects Completed</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Emergency Service</span>
+                </div>
+            </div>
+
+            <div class="hero-buttons">
+                <a href="#contact" class="btn-primary">
+                    Get Free Estimate <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#services" class="btn-secondary">
+                    Our Services
+                </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://kimi-web-img.moonshot.cn/img/lirp.cdn-website.com/732d8d258ae62406ff700f38d597d52884d78f36.jpg" alt="Professional Electrician at Work">
+            <div class="floating-card left">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Licensed & Insured</h4>
+                <p>Full protection guaranteed</p>
+            </div>
+            <div class="floating-card right">
+                <i class="fas fa-clock"></i>
+                <h4>Fast Response</h4>
+                <p>Same-day service available</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Our Expert Services</h2>
+            <p>Comprehensive electrical solutions tailored for residential, commercial, and industrial needs in the Central Valley</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/f1c352deb56325fd0cf8ce1baa905f6d1bee40a3.jpg" alt="Electrical Panel Installation">
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Electrical Panel Upgrades</h3>
+                    <p>Modern panel installations and upgrades to handle today's power demands safely and efficiently.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/primetimewa.com.au/aa4c82952c061f9963bd53835718dc83c34c2bfa.jpg" alt="LED Lighting Installation">
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>LED Lighting Solutions</h3>
+                    <p>Energy-efficient indoor and outdoor lighting installations that reduce costs and enhance aesthetics.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.energy.gov/f38689236c69725867b7af12c3f9e2902918d4f5.jpg" alt="Solar Battery Storage">
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-solar-panel"></i>
+                    </div>
+                    <h3>Solar & Battery Storage</h3>
+                    <p>Cutting-edge solar installations and battery backup systems for sustainable energy independence.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/i0.wp.com/e63e51ba46e41708cdc4c081bbce3863d4cc8333.png" alt="Residential Electrical Service">
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Residential Services</h3>
+                    <p>Complete home electrical solutions from troubleshooting to renovations and new construction wiring.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/c656258bd0bcb5034559e585319ee96353f039e6.jpg" alt="Commercial Lighting">
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Commercial Electrical</h3>
+                    <p>Full-service electrical contracting for offices, retail spaces, and industrial facilities.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="margin: 2rem auto 0; width: 80px; height: 80px;">
+                    <i class="fas fa-tools" style="font-size: 2rem;"></i>
+                </div>
+                <div class="service-content" style="text-align: center;">
+                    <h3>EV Charging Stations</h3>
+                    <p>Professional installation of electric vehicle charging stations for homes and businesses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>Family-Owned Excellence Since 2007</h2>
+            <p>Founded by Hector and Bea Pino, Electrical Power Source has been at the cutting edge of electrical construction for over 18 years. What started as a family dream has grown into one of Central Valley's most trusted electrical contractors.</p>
+            <p>Our dedicated team of electricians brings expertise, integrity, and innovation to every project. We don't just install wires and fixtures—we build lasting relationships with our clients based on trust and exceptional workmanship.</p>
+            
+            <div class="founders">
+                <div class="founder">
+                    <div class="founder-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h4>Hector Pino</h4>
+                    <span>Founder</span>
+                </div>
+                <div class="founder">
+                    <div class="founder-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h4>Bea Pino</h4>
+                    <span>CEO</span>
+                </div>
+            </div>
+        </div>
+        <div class="about-image">
+            <img src="https://kimi-web-img.moonshot.cn/img/www.sescos.com/72b4ec5c5b7adafec670413fb57a9d4ec136845a.jpg" alt="Residential Electrical Work">
+            <div class="experience-badge">
+                <span class="years">18+</span>
+                <span>Years of<br>Excellence</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us" id="why-us">
+        <div class="section-header">
+            <h2>Why Choose Electrical Power Source?</h2>
+            <p>We combine technical expertise with genuine care for our customers</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h3>Licensed & Certified</h3>
+                <p>Fully licensed electricians with ongoing training in latest technologies</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h3>Free Estimates</h3>
+                <p>Transparent pricing with no-obligation quotes for all projects</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Round-the-clock emergency services when you need us most</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3>Quality Guarantee</h3>
+                <p>We stand behind our work with comprehensive warranties</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>What Our Clients Say</h2>
+            <p>Real feedback from Central Valley homeowners and businesses</p>
+        </div>
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <p class="testimonial-text">"Electrical Power Source transformed our office lighting with LED upgrades. Professional, punctual, and the energy savings have been incredible. Highly recommend!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="author-info">
+                        <h4>Sarah Mitchell</h4>
+                        <span>Business Owner, Fresno</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Get Your Free Estimate Today</h2>
+                <p>Ready to power your project? Contact us for a free consultation and estimate. Our team is here to help!</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Visit Us</h4>
+                            <p>5796 S. Elm Ave<br>Fresno, CA 93706</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p>(559) 210-9405</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>service@electricalpowersourceinc.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Working Hours</h4>
+                            <p>Mon-Fri: 8:00 AM - 4:00 PM<br>Sat-Sun: By Appointment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="(559) 123-4567" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Service Needed</label>
+                    <select>
+                        <option>Residential Electrical</option>
+                        <option>Commercial Electrical</option>
+                        <option>LED Lighting Installation</option>
+                        <option>Electrical Panel Upgrade</option>
+                        <option>Solar/Battery Storage</option>
+                        <option>EV Charging Station</option>
+                        <option>Emergency Repair</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea placeholder="Tell us about your project..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                    Send Message <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3><i class="fas fa-bolt"></i> Electrical Power Source</h3>
+                <p>Powering the Central Valley with excellence since 2007. Family-owned, community-focused, and committed to your safety and satisfaction.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-yelp"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Residential</a></li>
+                    <li><a href="#">Commercial</a></li>
+                    <li><a href="#">LED Lighting</a></li>
+                    <li><a href="#">Solar & Battery</a></li>
+                    <li><a href="#">EV Charging</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Emergency Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Electrical Power Source Inc. All rights reserved. | CSLB License #Verify</p>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-window" id="chatWindow">
+            <div class="chat-header">
+                <h4><i class="fas fa-robot"></i> EPS Assistant</h4>
+                <button class="close-chat" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="bot-avatar">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Hello! I'm your Electrical Power Source assistant. How can I help you today?</p>
+                        <div class="quick-replies">
+                            <button class="quick-reply" onclick="sendQuickReply('Get a quote')">Get a quote</button>
+                            <button class="quick-reply" onclick="sendQuickReply('Emergency service')">Emergency service</button>
+                            <button class="quick-reply" onclick="sendQuickReply('Our services')">Our services</button>
+                            <button class="quick-reply" onclick="sendQuickReply('Business hours')">Business hours</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                <button class="send-btn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <div class="chatbot-toggle" onclick="toggleChat()">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Chatbot functions
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.classList.toggle('active');
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                setTimeout(() => generateBotResponse(message), 1000);
+            }
+        }
+
+        function sendQuickReply(text) {
+            addMessage(text, 'user');
+            setTimeout(() => generateBotResponse(text), 1000);
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            if (sender === 'bot') {
+                messageDiv.innerHTML = `
+                    <div class="bot-avatar">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>${text}</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="message-content">
+                        <p>${text}</p>
+                    </div>
+                `;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function generateBotResponse(userMessage) {
+            const lowerMsg = userMessage.toLowerCase();
+            let response = '';
+            let quickReplies = [];
+
+            if (lowerMsg.includes('quote') || lowerMsg.includes('estimate') || lowerMsg.includes('price')) {
+                response = "I'd be happy to help you get a free estimate! You can fill out the contact form on our website or call us directly at (559) 210-9405. What type of project are you looking to get quoted?";
+                quickReplies = ['Residential', 'Commercial', 'LED Lighting', 'Solar Installation'];
+            } else if (lowerMsg.includes('emergency') || lowerMsg.includes('urgent') || lowerMsg.includes('power out')) {
+                response = "We understand electrical emergencies can't wait! Please call our emergency line immediately at (559) 210-9405. Our team is available 24/7 for urgent situations.";
+                quickReplies = ['Call now', 'Non-emergency help'];
+            } else if (lowerMsg.includes('service') || lowerMsg.includes('offer') || lowerMsg.includes('do you')) {
+                response = "We offer a full range of electrical services including:\n• Residential & Commercial Electrical\n• LED Lighting Installation\n• Electrical Panel Upgrades\n• Solar & Battery Storage Systems\n• EV Charging Stations\n• Emergency Repairs\n\nWhich service are you interested in?";
+                quickReplies = ['Residential', 'Commercial', 'Solar', 'EV Charging'];
+            } else if (lowerMsg.includes('hour') || lowerMsg.includes('open') || lowerMsg.includes('time')) {
+                response = "Our office hours are Monday-Friday from 8:00 AM to 4:00 PM. However, we offer 24/7 emergency services for urgent electrical issues. Would you like to schedule an appointment?";
+                quickReplies = ['Schedule appointment', 'Emergency service'];
+            } else if (lowerMsg.includes('location') || lowerMsg.includes('address') || lowerMsg.includes('where')) {
+                response = "We're located at 5796 S. Elm Ave, Fresno, CA 93706. We serve the entire Central Valley area including Fresno, Clovis, Madera, and surrounding communities.";
+                quickReplies = ['Get directions', 'Service areas'];
+            } else if (lowerMsg.includes('residential') || lowerMsg.includes('home') || lowerMsg.includes('house')) {
+                response = "Our residential services include electrical repairs, panel upgrades, lighting installation, rewiring, safety inspections, and smart home integrations. We offer free evaluations for homeowners!";
+                quickReplies = ['Get free evaluation', 'Panel upgrade', 'Lighting'];
+            } else if (lowerMsg.includes('commercial') || lowerMsg.includes('business') || lowerMsg.includes('office')) {
+                response = "For commercial clients, we provide complete electrical contracting services including new construction wiring, tenant improvements, lighting retrofits, and maintenance contracts. Let's discuss your project!";
+                quickReplies = ['New construction', 'LED retrofit', 'Maintenance'];
+            } else if (lowerMsg.includes('solar') || lowerMsg.includes('battery') || lowerMsg.includes('storage')) {
+                response = "We specialize in solar panel installation and battery storage systems (like Tesla Powerwall). These systems can significantly reduce your energy bills and provide backup power during outages. Interested in a consultation?";
+                quickReplies = ['Solar consultation', 'Battery storage', 'Learn more'];
+            } else if (lowerMsg.includes('led') || lowerMsg.includes('light')) {
+                response = "LED lighting upgrades can reduce your energy costs by up to 75%! We install indoor and outdoor LED solutions for homes and businesses. We also offer free lighting assessments.";
+                quickReplies = ['Home lighting', 'Business lighting', 'Free assessment'];
+            } else if (lowerMsg.includes('ev') || lowerMsg.includes('charging') || lowerMsg.includes('electric car')) {
+                response = "We install Level 2 EV charging stations for homes and businesses. Whether you have a Tesla, BMW, or any electric vehicle, we can set up the perfect charging solution for you.";
+                quickReplies = ['Home EV charger', 'Business EV stations', 'Get quote'];
+            } else if (lowerMsg.includes('hector') || lowerMsg.includes('bea') || lowerMsg.includes('owner') || lowerMsg.includes('founder')) {
+                response = "Electrical Power Source was founded by Hector and Bea Pino in 2007. As a family-owned business, we take pride in providing personalized service and treating every customer like family.";
+                quickReplies = ['Our story', 'Contact us'];
+            } else {
+                response = "Thanks for reaching out! I'm here to help with any electrical questions. You can ask about our services, request a quote, or get information about our company. What would you like to know?";
+                quickReplies = ['Get a quote', 'Our services', 'Contact info'];
+            }
+
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+            
+            let quickRepliesHtml = quickReplies.length > 0 ? 
+                '<div class="quick-replies">' + 
+                quickReplies.map(reply => `<button class="quick-reply" onclick="sendQuickReply('${reply}')">${reply}</button>`).join('') + 
+                '</div>' : '';
+            
+            messageDiv.innerHTML = `
+                <div class="bot-avatar">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="message-content">
+                    <p>${response}</p>
+                    ${quickRepliesHtml}
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! Our team will contact you within 24 hours.');
+            event.target.reset();
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.boxShadow = '0 2px 30px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+            }
+        });
+    </script>
+</body>
+</html>
