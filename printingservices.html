@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrintCraft Pro - Premium Printing Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            transform: perspective(1000px) rotateY(-5deg);
+        }
+
+        /* Trust Badges */
+        .trust-section {
+            padding: 3rem 2rem;
+            background: white;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trust-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trust-title {
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .trust-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            opacity: 0.6;
+        }
+
+        .trust-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            filter: grayscale(100%);
+            transition: all 0.3s;
+        }
+
+        .trust-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.125rem;
+        }
+
+        .categories-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .category-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .category-content {
+            padding: 2rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-count {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .category-arrow {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s;
+        }
+
+        .category-card:hover .category-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Featured Products */
+        .products {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .products-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--secondary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .product-image {
+            height: 250px;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            padding: 1rem;
+        }
+
+        .product-card:hover .product-actions {
+            bottom: 0;
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .product-price .original {
+            font-size: 1rem;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--secondary);
+        }
+
+        /* Product Detail Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            max-width: 1000px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: var(--shadow);
+        }
+
+        .modal-gallery {
+            background: #f0f4ff;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-main-image {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            min-height: 300px;
+        }
+
+        .modal-thumbnails {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.3s;
+        }
+
+        .thumbnail.active {
+            border-color: var(--primary);
+        }
+
+        .modal-details {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .variation-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .variation-label {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .variation-options {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .variation-btn {
+            padding: 0.75rem 1.25rem;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .variation-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .variation-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.3s;
+        }
+
+        .qty-btn:hover {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .qty-input {
+            width: 60px;
+            text-align: center;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+        }
+
+        .testimonials-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            font-size: 6rem;
+            color: var(--primary);
+            opacity: 0.1;
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-stars {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .testimonial-text {
+            color: var(--dark);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            font-weight: 700;
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Quote Form */
+        .quote-section {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .quote-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--dark) 0%, #2d3748 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .quote-form {
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-input {
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* AI Chatbot Widget */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 3000;
+        }
+
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), #764ba2);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-toggle.pulse::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--primary);
+            animation: pulse 2s infinite;
+            z-index: -1;
+        }
+
+        .chatbot-container {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chatbot-container.active {
+            display: flex;
+        }
+
+        .chatbot-container.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary), #764ba2);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chatbot-avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .chatbot-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .chatbot-close:hover {
+            opacity: 1;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: #f8fafc;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 1rem;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            animation: messageSlide 0.3s ease;
+        }
+
+        .message.bot {
+            background: white;
+            color: var(--dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .message.user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.typing {
+            display: flex;
+            gap: 4px;
+            padding: 1.25rem 1rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gray);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quick-reply {
+            padding: 0.5rem 1rem;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-reply:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .chatbot-input {
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+        }
+
+        .chat-send {
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .chat-send:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .lead-form {
+            background: rgba(37, 99, 235, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 0.5rem;
+        }
+
+        .lead-input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .lead-submit {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .modal-content {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-gallery {
+                min-height: 300px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .chatbot-container {
+                width: calc(100vw - 2rem);
+                right: -1rem;
+            }
+
+            .trust-logos {
+                gap: 2rem;
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--dark);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 4000;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span>🖨️</span>
+                PrintCraft Pro
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#quote">Get Quote</a></li>
+                <li><a href="#contact" class="nav-cta">Start Order</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Premium Printing Solutions for Your Business</h1>
+                <p>High-quality business cards, flyers, banners, and custom prints with fast turnaround times. Elevate your brand with professional printing services.</p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">Browse Products</a>
+                    <a href="#quote" class="btn btn-secondary">Get Custom Quote</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Orders Delivered</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">24h</div>
+                        <div class="stat-label">Fastest Delivery</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 400px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 6rem;">
+                    📦🎨📄
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-section">
+        <div class="trust-container">
+            <div class="trust-title">Trusted by leading brands worldwide</div>
+            <div class="trust-logos">
+                <div class="trust-logo">ACME Corp</div>
+                <div class="trust-logo">TechStart</div>
+                <div class="trust-logo">GlobalBrand</div>
+                <div class="trust-logo">DesignStudio</div>
+                <div class="trust-logo">MarketingPro</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" id="categories">
+        <div class="section-header">
+            <span class="section-tag">Our Services</span>
+            <h2 class="section-title">Browse by Category</h2>
+            <p class="section-subtitle">From business essentials to large format prints, we've got everything you need to make your brand stand out.</p>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card" onclick="scrollToProducts()">
+                <div class="category-image">💼</div>
+                <div class="category-content">
+                    <h3 class="category-title">Business Cards</h3>
+                    <p class="category-count">12 Products</p>
+                    <div class="category-arrow">→</div>
+                </div>
+            </div>
+            <div class="category-card" onclick="scrollToProducts()">
+                <div class="category-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📢</div>
+                <div class="category-content">
+                    <h3 class="category-title">Flyers & Brochures</h3>
+                    <p class="category-count">8 Products</p>
+                    <div class="category-arrow">→</div>
+                </div>
+            </div>
+            <div class="category-card" onclick="scrollToProducts()">
+                <div class="category-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🎪</div>
+                <div class="category-content">
+                    <h3 class="category-title">Banners & Signs</h3>
+                    <p class="category-count">15 Products</p>
+                    <div class="category-arrow">→</div>
+                </div>
+            </div>
+            <div class="category-card" onclick="scrollToProducts()">
+                <div class="category-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">📦</div>
+                <div class="category-content">
+                    <h3 class="category-title">Packaging</h3>
+                    <p class="category-count">6 Products</p>
+                    <div class="category-arrow">→</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products" id="products">
+        <div class="section-header">
+            <span class="section-tag">Best Sellers</span>
+            <h2 class="section-title">Featured Products</h2>
+            <p class="section-subtitle">Our most popular printing products with customizable options to fit your exact needs.</p>
+        </div>
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be injected by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-header">
+            <span class="section-tag">Testimonials</span>
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-subtitle">Don't just take our word for it - hear from businesses that trust us with their printing needs.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"The quality of business cards exceeded our expectations. The paper stock is premium and the color accuracy is perfect. Will definitely order again!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SK</div>
+                    <div class="author-info">
+                        <h4>Sarah Kim</h4>
+                        <p>CEO, TechStart Inc.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Fast turnaround time without compromising quality. Their customer service helped us choose the right paper for our wedding invitations. Highly recommend!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MJ</div>
+                    <div class="author-info">
+                        <h4>Michael Johnson</h4>
+                        <p>Event Planner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"We've been using PrintCraft for all our marketing materials. The consistency in quality and competitive pricing makes them our go-to printing partner."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AL</div>
+                    <div class="author-info">
+                        <h4>Amanda Lee</h4>
+                        <p>Marketing Director, GlobalBrand</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Form -->
+    <section class="quote-section" id="quote">
+        <div class="section-header">
+            <span class="section-tag">Custom Orders</span>
+            <h2 class="section-title">Get a Custom Quote</h2>
+            <p class="section-subtitle">Need something specific? Tell us about your project and we'll get back to you within 2 hours.</p>
+        </div>
+        <div class="quote-container">
+            <form class="quote-form" id="quoteForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" placeholder="john@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input" placeholder="+1 (555) 000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Company Name</label>
+                        <input type="text" class="form-input" placeholder="Your Company">
+                    </div>
+                    <div class="form-group full">
+                        <label class="form-label">Project Details</label>
+                        <textarea class="form-input" rows="4" placeholder="Tell us about your printing needs..." required></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Request Quote Now →</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>PrintCraft Pro</h3>
+                <p>Premium printing services for businesses of all sizes. Quality prints, fast delivery, exceptional service. Transform your ideas into reality with our state-of-the-art printing technology.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Business Cards</a></li>
+                    <li><a href="#">Flyers & Brochures</a></li>
+                    <li><a href="#">Banners & Signs</a></li>
+                    <li><a href="#">Custom Packaging</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Process</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PrintCraft Pro. All rights reserved.</p>
+            <p>Made with ❤️ for your business</p>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <div class="modal-content">
+            <div class="modal-gallery">
+                <div class="modal-main-image" id="modalMainImage">💼</div>
+                <div class="modal-thumbnails">
+                    <div class="thumbnail active" onclick="changeImage(0)">💼</div>
+                    <div class="thumbnail" onclick="changeImage(1)">📄</div>
+                    <div class="thumbnail" onclick="changeImage(2)">🎨</div>
+                </div>
+            </div>
+            <div class="modal-details">
+                <h2 class="modal-title" id="modalTitle">Premium Business Cards</h2>
+                <div class="modal-price" id="modalPrice">$49.00</div>
+                <p class="modal-description" id="modalDescription">
+                    Make a lasting impression with our premium business cards. Printed on high-quality cardstock with vibrant colors and crisp details. Perfect for networking events, client meetings, and everyday professional use.
+                </p>
+                
+                <div class="variation-section">
+                    <label class="variation-label">Paper Type</label>
+                    <div class="variation-options" id="paperOptions">
+                        <button class="variation-btn active" onclick="selectVariation('paper', 0, 0)">Matte</button>
+                        <button class="variation-btn" onclick="selectVariation('paper', 1, 5)">Glossy</button>
+                        <button class="variation-btn" onclick="selectVariation('paper', 2, 10)">Linen</button>
+                        <button class="variation-btn" onclick="selectVariation('paper', 3, 15)">Premium</button>
+                    </div>
+                </div>
+
+                <div class="variation-section">
+                    <label class="variation-label">Size</label>
+                    <div class="variation-options" id="sizeOptions">
+                        <button class="variation-btn active" onclick="selectVariation('size', 0, 0)">Standard (3.5" x 2")</button>
+                        <button class="variation-btn" onclick="selectVariation('size', 1, 10)">Square (2.5" x 2.5")</button>
+                        <button class="variation-btn" onclick="selectVariation('size', 2, 15)">Slim (3.5" x 1.5")</button>
+                    </div>
+                </div>
+
+                <div class="variation-section">
+                    <label class="variation-label">Quantity</label>
+                    <div class="quantity-selector">
+                        <button class="qty-btn" onclick="updateQuantity(-1)">−</button>
+                        <input type="number" class="qty-input" id="quantityInput" value="100" min="50" step="50" readonly>
+                        <button class="qty-btn" onclick="updateQuantity(1)">+</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-btn" onclick="addToCart()">
+                    <span>🛒</span>
+                    Add to Cart - $<span id="totalPrice">49.00</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chatbot Widget -->
+    <div class="chatbot-widget">
+        <div class="chatbot-container" id="chatbotContainer">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <div class="chatbot-avatar">🤖</div>
+                    <div>
+                        <div style="font-weight: 700;">Print Assistant</div>
+                        <div class="chatbot-status">
+                            <span class="status-dot"></span>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+            </div>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot">
+                    Hi there! 👋 I'm your AI printing assistant. I can help you find the perfect products, get custom quotes, or answer any questions. How can I help you today?
+                    <div class="quick-replies">
+                        <button class="quick-reply" onclick="sendQuickReply('Business Cards')">Business Cards</button>
+                        <button class="quick-reply" onclick="sendQuickReply('Get Quote')">Get Quote</button>
+                        <button class="quick-reply" onclick="sendQuickReply('Track Order')">Track Order</button>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="handleChatKeypress(event)">
+                <button class="chat-send" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+        <button class="chatbot-toggle pulse" id="chatbotToggle" onclick="toggleChatbot()">
+            💬
+        </button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span>✓</span>
+        <span id="toastMessage">Item added to cart!</span>
+    </div>
+
+    <script>
+        // Product Data
+        const products = [
+            {
+                id: 1,
+                name: "Premium Business Cards",
+                basePrice: 49,
+                badge: "Best Seller",
+                rating: 5,
+                image: "💼",
+                description: "Make a lasting impression with our premium business cards. High-quality cardstock with vibrant colors."
+            },
+            {
+                id: 2,
+                name: "Flyer Printing",
+                basePrice: 89,
+                badge: "Popular",
+                rating: 5,
+                image: "📢",
+                description: "Promote your business with eye-catching flyers. Available in multiple sizes and paper types."
+            },
+            {
+                id: 3,
+                name: "Roll-up Banners",
+                basePrice: 129,
+                badge: "New",
+                rating: 4,
+                image: "🎪",
+                description: "Professional roll-up banners perfect for trade shows, events, and in-store displays."
+            },
+            {
+                id: 4,
+                name: "Brochure Printing",
+                basePrice: 199,
+                badge: null,
+                rating: 5,
+                image: "📖",
+                description: "Tell your story with beautifully printed brochures. Multiple folding options available."
+            },
+            {
+                id: 5,
+                name: "Custom Stickers",
+                basePrice: 39,
+                badge: "Sale",
+                rating: 5,
+                image: "🏷️",
+                description: "High-quality custom stickers in any shape or size. Perfect for branding and packaging."
+            },
+            {
+                id: 6,
+                name: "Presentation Folders",
+                basePrice: 159,
+                badge: null,
+                rating: 4,
+                image: "📁",
+                description: "Professional presentation folders with pockets. Impress your clients with organized materials."
+            }
+        ];
+
+        // State Management
+        let currentProduct = products[0];
+        let selectedPaper = 0;
+        let selectedSize = 0;
+        let quantity = 100;
+        let paperPriceMod = 0;
+        let sizePriceMod = 0;
+        let chatOpen = false;
+        let chatStep = 0;
+        let leadData = {};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            setupNavbar();
+            setupProactiveChat();
+        });
+
+        // Render Products
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(product => `
+                <div class="product-card" onclick="openProductModal(${product.id})">
+                    ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                    <div class="product-image">
+                        <div style="font-size: 5rem;">${product.image}</div>
+                        <div class="product-actions">
+                            <button class="action-btn" onclick="event.stopPropagation(); quickAdd(${product.id})">🛒</button>
+                            <button class="action-btn" onclick="event.stopPropagation(); openProductModal(${product.id})">👁️</button>
+                            <button class="action-btn" onclick="event.stopPropagation(); toggleWishlist(${product.id})">♥️</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-meta">
+                            <div class="product-price">
+                                $${product.basePrice}
+                                ${product.badge === 'Sale' ? '<span class="original">$' + Math.round(product.basePrice * 1.3) + '</span>' : ''}
+                            </div>
+                            <div class="product-rating">
+                                ${'★'.repeat(product.rating)}${'☆'.repeat(5 - product.rating)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Modal Functions
+        function openProductModal(productId) {
+            currentProduct = products.find(p => p.id === productId);
+            document.getElementById('modalTitle').textContent = currentProduct.name;
+            document.getElementById('modalDescription').textContent = currentProduct.description;
+            document.getElementById('modalMainImage').textContent = currentProduct.image;
+            
+            // Reset variations
+            selectedPaper = 0;
+            selectedSize = 0;
+            quantity = 100;
+            paperPriceMod = 0;
+            sizePriceMod = 0;
+            
+            updatePrice();
+            
+            const modal = document.getElementById('productModal');
+            modal.classList.add('active');
+            setTimeout(() => modal.classList.add('show'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        function changeImage(index) {
+            document.querySelectorAll('.thumbnail').forEach((t, i) => {
+                t.classList.toggle('active', i === index);
+            });
+            const icons = ['💼', '📄', '🎨'];
+            document.getElementById('modalMainImage').textContent = icons[index];
+        }
+
+        // Variation Selection
+        function selectVariation(type, index, priceMod) {
+            if (type === 'paper') {
+                selectedPaper = index;
+                paperPriceMod = priceMod;
+                document.querySelectorAll('#paperOptions .variation-btn').forEach((btn, i) => {
+                    btn.classList.toggle('active', i === index);
+                });
+            } else {
+                selectedSize = index;
+                sizePriceMod = priceMod;
+                document.querySelectorAll('#sizeOptions .variation-btn').forEach((btn, i) => {
+                    btn.classList.toggle('active', i === index);
+                });
+            }
+            updatePrice();
+        }
+
+        function updateQuantity(change) {
+            quantity = Math.max(50, quantity + (change * 50));
+            document.getElementById('quantityInput').value = quantity;
+            updatePrice();
+        }
+
+        function updatePrice() {
+            const basePrice = currentProduct.basePrice;
+            const total = (basePrice + paperPriceMod + sizePriceMod) * (quantity / 100);
+            document.getElementById('modalPrice').textContent = '$' + total.toFixed(2);
+            document.getElementById('totalPrice').textContent = total.toFixed(2);
+        }
+
+        // Cart Functions
+        function addToCart() {
+            closeModal();
+            showToast(`${currentProduct.name} added to cart!`);
+        }
+
+        function quickAdd(productId) {
+            const product = products.find(p => p.id === productId);
+            showToast(`${product.name} added to cart!`);
+        }
+
+        function toggleWishlist(productId) {
+            showToast('Added to wishlist!');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Chatbot Functions
+        function toggleChatbot() {
+            chatOpen = !chatOpen;
+            const container = document.getElementById('chatbotContainer');
+            const toggle = document.getElementById('chatbotToggle');
+            
+            if (chatOpen) {
+                container.classList.add('active');
+                setTimeout(() => container.classList.add('show'), 10);
+                toggle.classList.remove('pulse');
+            } else {
+                container.classList.remove('show');
+                setTimeout(() => container.classList.remove('active'), 300);
+            }
+        }
+
+        function handleChatKeypress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Simulate typing
+            showTyping();
+            
+            setTimeout(() => {
+                removeTyping();
+                handleBotResponse(message);
+            }, 1000 + Math.random() * 1000);
+        }
+
+        function sendQuickReply(text) {
+            addMessage(text, 'user');
+            showTyping();
+            setTimeout(() => {
+                removeTyping();
+                handleBotResponse(text);
+            }, 800);
+        }
+
+        function addMessage(text, sender) {
+            const container = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showTyping() {
+            const container = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot typing';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+            container.appendChild(typingDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function removeTyping() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+
+        function handleBotResponse(userMessage) {
+            const msg = userMessage.toLowerCase();
+            let response = '';
+            let quickReplies = [];
+
+            // Lead generation flow
+            if (chatStep === 1) {
+                leadData.name = userMessage;
+                chatStep = 2;
+                response = `Nice to meet you, ${userMessage}! What's your email address so I can send you a personalized quote?`;
+            } else if (chatStep === 2) {
+                leadData.email = userMessage;
+                chatStep = 3;
+                response = "Great! What type of printing project are you working on? (Business cards, flyers, banners, etc.)";
+                quickReplies = ['Business Cards', 'Flyers', 'Banners', 'Custom Project'];
+            } else if (chatStep === 3) {
+                leadData.project = userMessage;
+                chatStep = 4;
+                response = `Perfect! Thanks for sharing those details. Our team will review your request for ${userMessage} and send a quote to ${leadData.email} within 2 hours. Is there anything else I can help you with?`;
+                quickReplies = ['Browse Products', 'Speak to Human', 'No, thanks'];
+                console.log('Lead captured:', leadData);
+            } else if (msg.includes('quote') || msg.includes('price') || msg.includes('cost')) {
+                chatStep = 1;
+                response = "I'd be happy to help you get a custom quote! First, could you tell me your name?";
+            } else if (msg.includes('business card')) {
+                response = "Our business cards start at $49 for 100 cards. We offer matte, glossy, linen, and premium paper options. Would you like to see our business card products or get a custom quote?";
+                quickReplies = ['View Products', 'Get Quote', 'Paper Options'];
+            } else if (msg.includes('track')) {
+                response = "To track your order, I'll need your order number. It starts with 'PCP-'. You can also check your email for tracking details. Do you have your order number?";
+            } else if (msg.includes('help') || msg.includes('support')) {
+                response = "I'm here to help! I can assist with product recommendations, custom quotes, order tracking, or technical questions. What do you need help with?";
+                quickReplies = ['Product Help', 'Get Quote', 'Track Order', 'Talk to Human'];
+            } else {
+                response = "I understand you're interested in printing services. I can help you find the right products, provide custom quotes, or answer questions. What would you like to do?";
+                quickReplies = ['Browse Products', 'Get Custom Quote', 'Track Order', 'Ask Question'];
+            }
+
+            const container = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+            
+            let html = response;
+            if (quickReplies.length > 0) {
+                html += '<div class="quick-replies">' + 
+                    quickReplies.map(r => `<button class="quick-reply" onclick="sendQuickReply('${r}')">${r}</button>`).join('') + 
+                    '</div>';
+            }
+            
+            messageDiv.innerHTML = html;
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function setupProactiveChat() {
+            setTimeout(() => {
+                if (!chatOpen) {
+                    document.getElementById('chatbotToggle').classList.add('pulse');
+                }
+            }, 5000);
+        }
+
+        // Navbar Scroll Effect
+        function setupNavbar() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Smooth Scroll
+        function scrollToProducts() {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Form Submission
+        document.getElementById('quoteForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showToast('Quote request submitted! We\'ll contact you within 2 hours.');
+            e.target.reset();
+        });
+
+        // Close modal on overlay click
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+    </script>
+</body>
+</html>
