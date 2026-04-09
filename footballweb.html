@@ -1,0 +1,3053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Football - Youth Athlete Development Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(30, 30, 40, 0.6);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --accent-primary: #00f5d4;
+            --accent-secondary: #00bbf9;
+            --accent-tertiary: #f15bb5;
+            --accent-warning: #fee440;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #6b6b7b;
+            --gradient-primary: linear-gradient(135deg, #00f5d4 0%, #00bbf9 100%);
+            --gradient-secondary: linear-gradient(135deg, #f15bb5 0%, #fee440 100%);
+            --shadow-glow: 0 0 40px rgba(0, 245, 212, 0.15);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 245, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(241, 91, 181, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 187, 249, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-text-fill-color: white;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-tertiary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-tertiary);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            padding: 2px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--bg-primary);
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: var(--transition-smooth);
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--bg-primary);
+            box-shadow: 0 4px 20px rgba(0, 245, 212, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 245, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-glass);
+            color: var(--text-primary);
+            border: 1px solid var(--border-glass);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glow::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: var(--transition-smooth);
+            opacity: 0;
+        }
+
+        .btn-glow:hover::after {
+            animation: glowSweep 0.6s ease;
+        }
+
+        @keyframes glowSweep {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Player Card (FIFA Style) */
+        .player-card {
+            background: linear-gradient(145deg, rgba(30,30,40,0.8), rgba(20,20,30,0.9));
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid var(--border-glass);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .player-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,245,212,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .player-card-header {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .player-image-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .player-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.1);
+        }
+
+        .player-level {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--bg-primary);
+            border: 3px solid var(--bg-primary);
+            box-shadow: 0 4px 15px rgba(0,245,212,0.4);
+        }
+
+        .player-info h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .player-position {
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .player-team {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .player-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition-smooth);
+        }
+
+        .stat-item:hover {
+            background: rgba(0,0,0,0.4);
+            transform: scale(1.02);
+            border-color: rgba(0,245,212,0.2);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+        }
+
+        .stat-value span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* XP & Streak Section */
+        .xp-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-glass);
+            margin-bottom: 2rem;
+        }
+
+        .xp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .xp-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .xp-flame {
+            color: var(--accent-warning);
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .streak-count {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-warning);
+        }
+
+        .xp-bar-container {
+            background: rgba(0,0,0,0.4);
+            height: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .xp-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            transition: width 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .xp-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .xp-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .action-card {
+            background: linear-gradient(135deg, rgba(0,245,212,0.1), rgba(0,187,249,0.05));
+            border: 1px solid rgba(0,245,212,0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 0;
+        }
+
+        .action-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,245,212,0.2);
+            border-color: rgba(0,245,212,0.4);
+        }
+
+        .action-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0,245,212,0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            color: var(--accent-primary);
+        }
+
+        .action-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .action-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Weekly Progress */
+        .progress-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .progress-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .progress-ring {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-bg {
+            fill: none;
+            stroke: rgba(255,255,255,0.1);
+            stroke-width: 8;
+        }
+
+        .progress-ring-fill {
+            fill: none;
+            stroke: url(#gradient);
+            stroke-width: 8;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease;
+            filter: drop-shadow(0 0 10px rgba(0,245,212,0.5));
+        }
+
+        .progress-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .progress-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Training Program */
+        .program-timeline {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-primary) transparent;
+        }
+
+        .program-timeline::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .program-timeline::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .program-timeline::-webkit-scrollbar-thumb {
+            background: var(--accent-primary);
+            border-radius: 3px;
+        }
+
+        .week-card {
+            min-width: 280px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .week-card.active {
+            border-color: var(--accent-primary);
+            background: linear-gradient(145deg, rgba(0,245,212,0.05), transparent);
+        }
+
+        .week-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .week-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .week-number {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .week-status {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .week-status.completed {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        .week-status.current {
+            background: var(--accent-warning);
+            color: var(--bg-primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(254, 228, 64, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(254, 228, 64, 0); }
+        }
+
+        .week-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .week-focus {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .week-progress {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .day-dot {
+            flex: 1;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            transition: var(--transition-smooth);
+        }
+
+        .day-dot.completed {
+            background: var(--accent-primary);
+            box-shadow: 0 0 10px rgba(0,245,212,0.5);
+        }
+
+        .day-dot.active {
+            background: var(--accent-warning);
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Exercise Cards */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .exercise-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .exercise-thumbnail {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .exercise-card:hover .exercise-thumbnail img {
+            transform: scale(1.1);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: var(--transition-smooth);
+        }
+
+        .exercise-card:hover .play-overlay {
+            background: var(--accent-primary);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-icon {
+            color: white;
+            font-size: 1.5rem;
+            margin-left: 4px;
+        }
+
+        .exercise-info {
+            padding: 1.25rem;
+        }
+
+        .exercise-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(0,245,212,0.1);
+            color: var(--accent-primary);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        .exercise-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .exercise-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .exercise-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Profile Page */
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-header {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(180deg, rgba(0,245,212,0.1), transparent);
+        }
+
+        .profile-avatar-large {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            padding: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .profile-avatar-large img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-primary);
+        }
+
+        .edit-avatar {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-glass);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            color: var(--text-primary);
+        }
+
+        .edit-avatar:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            transform: scale(1.1);
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-role {
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select {
+            padding: 1rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(0,245,212,0.1);
+        }
+
+        .skill-sliders {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-name {
+            font-weight: 500;
+        }
+
+        .skill-value {
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 8px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .slider-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+            transition: width 0.3s;
+            box-shadow: 0 0 20px rgba(0,245,212,0.3);
+        }
+
+        input[type="range"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Progress Charts */
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 1.5rem;
+            height: 400px;
+            position: relative;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-filters {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: rgba(0,245,212,0.1);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Gamification */
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .badge-item {
+            aspect-ratio: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge-item:hover {
+            transform: translateY(-5px) scale(1.05);
+            border-color: var(--accent-primary);
+        }
+
+        .badge-item.locked {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+
+        .badge-item:not(.locked)::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,245,212,0.2) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .badge-icon {
+            font-size: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge-name {
+            font-size: 0.75rem;
+            text-align: center;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+            padding: 0 0.5rem;
+        }
+
+        /* Leaderboard */
+        .leaderboard-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .leaderboard-item {
+            display: grid;
+            grid-template-columns: 50px 60px 1fr auto;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            transition: var(--transition-smooth);
+        }
+
+        .leaderboard-item:hover {
+            background: rgba(255,255,255,0.05);
+            transform: translateX(5px);
+        }
+
+        .leaderboard-item.current-user {
+            border-color: var(--accent-primary);
+            background: rgba(0,245,212,0.05);
+        }
+
+        .rank {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .rank.gold { color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+        .rank.silver { color: #c0c0c0; }
+        .rank.bronze { color: #cd7f32; }
+
+        .leaderboard-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .leaderboard-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .leaderboard-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .leaderboard-team {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .leaderboard-xp {
+            text-align: right;
+        }
+
+        .xp-number {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .xp-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Activity Feed */
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            transition: var(--transition-smooth);
+        }
+
+        .activity-item:hover {
+            border-color: rgba(255,255,255,0.15);
+            transform: translateX(5px);
+        }
+
+        .activity-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-user {
+            font-weight: 600;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .activity-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+        }
+
+        .activity-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .activity-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--accent-primary);
+        }
+
+        /* Subscription */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-primary);
+            background: linear-gradient(145deg, rgba(0,245,212,0.05), transparent);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
+            color: var(--bg-primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .pricing-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-check {
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        .pricing-card.featured .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Search & Filter */
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-input input {
+            width: 100%;
+            padding-left: 3rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .filter-select {
+            min-width: 150px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .exercise-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .badges-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .leaderboard-item {
+                grid-template-columns: 40px 50px 1fr auto;
+                gap: 0.75rem;
+                padding: 0.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--accent-primary);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+        }
+
+        .toast-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .toast-message {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+        }
+
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-size: 1.25rem;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+            transform: rotate(90deg);
+        }
+
+        /* SVG Gradients */
+        .svg-defs {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+    
+    <svg class="svg-defs">
+        <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#00f5d4;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#00bbf9;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav">
+            <div class="logo">
+                <div class="logo-icon">⚽</div>
+                NextGen Football
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#" class="active" data-page="dashboard">Dashboard</a></li>
+                <li><a href="#" data-page="profile">Profile</a></li>
+                <li><a href="#" data-page="training">Training</a></li>
+                <li><a href="#" data-page="exercises">Exercises</a></li>
+                <li><a href="#" data-page="progress">Progress</a></li>
+                <li><a href="#" data-page="social">Social</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="icon-btn" onclick="showToast('No new notifications', 'info')">
+                    🔔
+                    <span class="notification-badge"></span>
+                </button>
+                <div class="user-avatar" onclick="navigateTo('profile')">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop" alt="User">
+                </div>
+                <div class="menu-toggle" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Dashboard Page -->
+        <div id="dashboard" class="page active">
+            <div class="dashboard-grid">
+                <div class="left-column">
+                    <div class="player-card">
+                        <div class="player-card-header">
+                            <div class="player-image-container">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop" alt="Player" class="player-image">
+                                <div class="player-level">12</div>
+                            </div>
+                            <div class="player-info">
+                                <div class="player-position">Attacking Midfielder</div>
+                                <h2>Alex Chen</h2>
+                                <div class="player-team">Youth Academy U16</div>
+                            </div>
+                        </div>
+                        
+                        <div class="player-stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-label">Pace</div>
+                                <div class="stat-value">84<span>/100</span></div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Strength</div>
+                                <div class="stat-value">72<span>/100</span></div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Agility</div>
+                                <div class="stat-value">91<span>/100</span></div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Stamina</div>
+                                <div class="stat-value">78<span>/100</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="xp-section" style="margin-top: 1.5rem;">
+                        <div class="xp-header">
+                            <div class="xp-title">
+                                <span class="xp-flame">🔥</span>
+                                <span>Training Streak</span>
+                            </div>
+                            <div class="streak-count">12 Days</div>
+                        </div>
+                        <div class="xp-bar-container">
+                            <div class="xp-bar" style="width: 75%;"></div>
+                        </div>
+                        <div class="xp-text">
+                            <span>Level 12</span>
+                            <span>2,450 / 3,000 XP</span>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions" style="margin-top: 1.5rem;">
+                        <div class="action-card" onclick="navigateTo('training')">
+                            <div class="action-icon">▶️</div>
+                            <div class="action-title">Start Training</div>
+                            <div class="action-desc">Continue Week 4 Day 3</div>
+                        </div>
+                        <div class="action-card" onclick="navigateTo('exercises')">
+                            <div class="action-icon">📚</div>
+                            <div class="action-title">Exercise Library</div>
+                            <div class="action-desc">245 exercises available</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <h2 class="section-title">
+                        <span>Weekly</span> Progress
+                    </h2>
+                    
+                    <div class="progress-section">
+                        <div class="progress-card">
+                            <div class="progress-ring">
+                                <svg width="120" height="120">
+                                    <circle class="progress-ring-bg" cx="60" cy="60" r="52"/>
+                                    <circle class="progress-ring-fill" cx="60" cy="60" r="52" 
+                                            stroke-dasharray="326.73" stroke-dashoffset="65.35"/>
+                                </svg>
+                                <div class="progress-value">80%</div>
+                            </div>
+                            <div class="progress-label">Training Completion</div>
+                            <div class="progress-sub">4 of 5 sessions</div>
+                        </div>
+
+                        <div class="progress-card">
+                            <div class="progress-ring">
+                                <svg width="120" height="120">
+                                    <circle class="progress-ring-bg" cx="60" cy="60" r="52"/>
+                                    <circle class="progress-ring-fill" cx="60" cy="60" r="52" 
+                                            stroke-dasharray="326.73" stroke-dashoffset="98.02" 
+                                            style="stroke: url(#gradient); filter: drop-shadow(0 0 10px rgba(241, 91, 181, 0.5));"/>
+                                </svg>
+                                <div class="progress-value">70%</div>
+                            </div>
+                            <div class="progress-label">Skill Improvement</div>
+                            <div class="progress-sub">+5% this week</div>
+                        </div>
+
+                        <div class="progress-card">
+                            <div class="progress-ring">
+                                <svg width="120" height="120">
+                                    <circle class="progress-ring-bg" cx="60" cy="60" r="52"/>
+                                    <circle class="progress-ring-fill" cx="60" cy="60" r="52" 
+                                            stroke-dasharray="326.73" stroke-dashoffset="32.67" 
+                                            style="stroke: #fee440; filter: drop-shadow(0 0 10px rgba(254, 228, 64, 0.5));"/>
+                                </svg>
+                                <div class="progress-value">90%</div>
+                            </div>
+                            <div class="progress-label">Goal Achievement</div>
+                            <div class="progress-sub">9 of 10 targets</div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title" style="margin-top: 2rem;">
+                        <span>Recent</span> Achievements
+                    </h2>
+                    
+                    <div class="badges-grid" style="margin-bottom: 2rem;">
+                        <div class="badge-item">
+                            <div class="badge-icon">⚡</div>
+                            <div class="badge-name">Speed Demon</div>
+                        </div>
+                        <div class="badge-item">
+                            <div class="badge-icon">💪</div>
+                            <div class="badge-name">Iron Will</div>
+                        </div>
+                        <div class="badge-item">
+                            <div class="badge-icon">🎯</div>
+                            <div class="badge-name">Sharp Shooter</div>
+                        </div>
+                        <div class="badge-item locked">
+                            <div class="badge-icon">🔒</div>
+                            <div class="badge-name">Marathoner</div>
+                        </div>
+                        <div class="badge-item locked">
+                            <div class="badge-icon">🔒</div>
+                            <div class="badge-name">Tactician</div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title">
+                        <span>Activity</span> Feed
+                    </h2>
+                    
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" class="activity-avatar" alt="User">
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <span class="activity-user">Sarah Miller</span>
+                                    <span class="activity-time">2h ago</span>
+                                </div>
+                                <div class="activity-text">Completed the Advanced Dribbling Drill with a perfect score! 🏆</div>
+                                <div class="activity-stats">
+                                    <span class="activity-stat">⚡ 450 XP</span>
+                                    <span class="activity-stat">⏱️ 12:30</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" class="activity-avatar" alt="User">
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <span class="activity-user">Jake Thompson</span>
+                                    <span class="activity-time">4h ago</span>
+                                </div>
+                                <div class="activity-text">New personal best on the 40m sprint: 5.2 seconds! 🚀</div>
+                                <div class="activity-stats">
+                                    <span class="activity-stat">⚡ 320 XP</span>
+                                    <span class="activity-stat">📈 +0.3s</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile" class="page">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar-large">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop" alt="Profile">
+                        <div class="edit-avatar">📷</div>
+                    </div>
+                    <h1 class="profile-name">Alex Chen</h1>
+                    <div class="profile-role">Elite Youth Player • U16 Academy</div>
+                </div>
+
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">Personal Information</h3>
+                        <button class="btn btn-secondary" onclick="showToast('Profile updated successfully!', 'success')">Save Changes</button>
+                    </div>
+                    
+                    <form class="profile-form" onsubmit="event.preventDefault(); showToast('Profile updated!', 'success');">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" value="15" min="10" max="21">
+                            </div>
+                            <div class="form-group">
+                                <label>Height (cm)</label>
+                                <input type="number" value="175">
+                            </div>
+                            <div class="form-group">
+                                <label>Weight (kg)</label>
+                                <input type="number" value="62">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Primary Position</label>
+                                <select>
+                                    <option>Attacking Midfielder</option>
+                                    <option>Striker</option>
+                                    <option>Winger</option>
+                                    <option>Central Midfielder</option>
+                                    <option>Defensive Midfielder</option>
+                                    <option>Defender</option>
+                                    <option>Goalkeeper</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Secondary Position</label>
+                                <select>
+                                    <option>Winger</option>
+                                    <option>Striker</option>
+                                    <option>Attacking Midfielder</option>
+                                    <option>Central Midfielder</option>
+                                    <option>Defensive Midfielder</option>
+                                    <option>Defender</option>
+                                    <option>Goalkeeper</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Preferred Foot</label>
+                                <select>
+                                    <option>Right</option>
+                                    <option>Left</option>
+                                    <option>Both</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Skill Ratings</h3>
+                    </div>
+                    
+                    <div class="skill-sliders">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Pace & Acceleration</span>
+                                <span class="skill-value">84</span>
+                            </div>
+                            <div class="slider-container">
+                                <div class="slider-fill" style="width: 84%"></div>
+                                <input type="range" min="0" max="100" value="84" oninput="updateSkill(this, 0)">
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Ball Control & Dribbling</span>
+                                <span class="skill-value">88</span>
+                            </div>
+                            <div class="slider-container">
+                                <div class="slider-fill" style="width: 88%"></div>
+                                <input type="range" min="0" max="100" value="88" oninput="updateSkill(this, 1)">
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Passing Accuracy</span>
+                                <span class="skill-value">82</span>
+                            </div>
+                            <div class="slider-container">
+                                <div class="slider-fill" style="width: 82%"></div>
+                                <input type="range" min="0" max="100" value="82" oninput="updateSkill(this, 2)">
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Shooting Power</span>
+                                <span class="skill-value">76</span>
+                            </div>
+                            <div class="slider-container">
+                                <div class="slider-fill" style="width: 76%"></div>
+                                <input type="range" min="0" max="100" value="76" oninput="updateSkill(this, 3)">
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Physical Strength</span>
+                                <span class="skill-value">72</span>
+                            </div>
+                            <div class="slider-container">
+                                <div class="slider-fill" style="width: 72%"></div>
+                                <input type="range" min="0" max="100" value="72" oninput="updateSkill(this, 4)">
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Tactical Awareness</span>
+                                <span class="skill-value">79</span>
+                            </div>
+                            <div class="slider-container">
+                                <div class="slider-fill" style="width: 79%"></div>
+                                <input type="range" min="0" max="100" value="79" oninput="updateSkill(this, 5)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Training Program Page -->
+        <div id="training" class="page">
+            <h2 class="section-title">
+                <span>8-Week</span> Development Program
+            </h2>
+            
+            <div class="program-timeline">
+                <div class="week-card completed" onclick="expandWeek(this)">
+                    <div class="week-header">
+                        <span class="week-number">Week 1</span>
+                        <div class="week-status completed">✓</div>
+                    </div>
+                    <h3 class="week-title">Foundation Building</h3>
+                    <p class="week-focus">Basic technique & fitness baseline</p>
+                    <div class="week-progress">
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%;">Review</button>
+                </div>
+
+                <div class="week-card completed" onclick="expandWeek(this)">
+                    <div class="week-header">
+                        <span class="week-number">Week 2</span>
+                        <div class="week-status completed">✓</div>
+                    </div>
+                    <h3 class="week-title">Coordination & Balance</h3>
+                    <p class="week-focus">Agility and body control focus</p>
+                    <div class="week-progress">
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%;">Review</button>
+                </div>
+
+                <div class="week-card completed" onclick="expandWeek(this)">
+                    <div class="week-header">
+                        <span class="week-number">Week 3</span>
+                        <div class="week-status completed">✓</div>
+                    </div>
+                    <h3 class="week-title">Ball Mastery</h3>
+                    <p class="week-focus">Advanced dribbling skills</p>
+                    <div class="week-progress">
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%;">Review</button>
+                </div>
+
+                <div class="week-card active" onclick="expandWeek(this)">
+                    <div class="week-header">
+                        <span class="week-number">Week 4</span>
+                        <div class="week-status current">●</div>
+                    </div>
+                    <h3 class="week-title">Speed & Power</h3>
+                    <p class="week-focus">Explosive acceleration training</p>
+                    <div class="week-progress">
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot completed"></div>
+                        <div class="day-dot active"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                    </div>
+                    <button class="btn btn-primary btn-glow" style="width: 100%;">Continue</button>
+                </div>
+
+                <div class="week-card" onclick="expandWeek(this)">
+                    <div class="week-header">
+                        <span class="week-number">Week 5</span>
+                        <div class="week-status">○</div>
+                    </div>
+                    <h3 class="week-title">Tactical Awareness</h3>
+                    <p class="week-focus">Game intelligence & positioning</p>
+                    <div class="week-progress">
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%;" disabled>Locked</button>
+                </div>
+
+                <div class="week-card" onclick="expandWeek(this)">
+                    <div class="week-header">
+                        <span class="week-number">Week 6</span>
+                        <div class="week-status">○</div>
+                    </div>
+                    <h3 class="week-title">Match Fitness</h3>
+                    <p class="week-focus">Endurance & stamina building</p>
+                    <div class="week-progress">
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%;" disabled>Locked</button>
+                </div>
+
+                <div class="week-card" onclick="expandWeek(this)">
+                    <div class="week-header">
+                        <span class="week-number">Week 7</span>
+                        <div class="week-status">○</div>
+                    </div>
+                    <h3 class="week-title">Technical Precision</h3>
+                    <p class="week-focus">Passing & shooting accuracy</p>
+                    <div class="week-progress">
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%;" disabled>Locked</button>
+                </div>
+
+                <div class="week-card" onclick="expandWeek(this)">
+                    <div class="week-header">
+                        <span class="week-number">Week 8</span>
+                        <div class="week-status">○</div>
+                    </div>
+                    <h3 class="week-title">Peak Performance</h3>
+                    <p class="week-focus">Integration & assessment</p>
+                    <div class="week-progress">
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                        <div class="day-dot"></div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%;" disabled>Locked</button>
+                </div>
+            </div>
+
+            <h2 class="section-title">
+                <span>Today's</span> Workout
+            </h2>
+            
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Explosive Speed Session</h3>
+                        <p style="color: var(--text-secondary);">Week 4 • Day 3 • 45 minutes</p>
+                    </div>
+                    <button class="btn btn-primary btn-glow" onclick="showToast('Starting workout...', 'success')">
+                        ▶ Start Session
+                    </button>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🏃</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 0.25rem;">Warm-up: Dynamic Stretching</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">10 minutes • Low intensity</div>
+                        </div>
+                        <div style="color: var(--accent-primary); font-weight: 600;">✓</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px solid var(--accent-primary);">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">⚡</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 0.25rem;">Main: Sprint Intervals</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">8 sets × 40m • High intensity</div>
+                        </div>
+                        <div style="color: var(--accent-warning); font-weight: 600;">▶</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 12px; opacity: 0.6;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🦵</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 0.25rem;">Strength: Plyometric Jumps</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">3 sets × 12 reps • Medium intensity</div>
+                        </div>
+                        <div style="color: var(--text-muted);">○</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 12px; opacity: 0.6;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🧘</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 0.25rem;">Cool-down: Static Stretching</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">5 minutes • Recovery</div>
+                        </div>
+                        <div style="color: var(--text-muted);">○</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise Library Page -->
+        <div id="exercises" class="page">
+            <h2 class="section-title">
+                <span>Exercise</span> Library
+            </h2>
+            
+            <div class="search-bar">
+                <div class="search-input">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Search exercises..." id="exerciseSearch" oninput="filterExercises()">
+                </div>
+                <select class="filter-select" id="categoryFilter" onchange="filterExercises()">
+                    <option value="all">All Categories</option>
+                    <option value="speed">Speed & Agility</option>
+                    <option value="strength">Strength</option>
+                    <option value="technical">Technical Skills</option>
+                    <option value="tactical">Tactical</option>
+                    <option value="fitness">Fitness</option>
+                </select>
+                <select class="filter-select" id="difficultyFilter" onchange="filterExercises()">
+                    <option value="all">All Levels</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+            </div>
+
+            <div class="exercise-grid" id="exerciseGrid">
+                <div class="exercise-card" data-category="speed" data-difficulty="intermediate">
+                    <div class="exercise-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400&h=300&fit=crop" alt="Sprint Drill">
+                        <div class="play-overlay">
+                            <span class="play-icon">▶</span>
+                        </div>
+                    </div>
+                    <div class="exercise-info">
+                        <span class="exercise-category">Speed & Agility</span>
+                        <h3 class="exercise-name">Cone Sprint Drill</h3>
+                        <div class="exercise-meta">
+                            <span>⏱️ 15 min</span>
+                            <span>📊 Intermediate</span>
+                            <span>🔥 120 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-card" data-category="technical" data-difficulty="advanced">
+                    <div class="exercise-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?w=400&h=300&fit=crop" alt="Dribbling">
+                        <div class="play-overlay">
+                            <span class="play-icon">▶</span>
+                        </div>
+                    </div>
+                    <div class="exercise-info">
+                        <span class="exercise-category" style="background: rgba(241, 91, 181, 0.1); color: var(--accent-tertiary);">Technical Skills</span>
+                        <h3 class="exercise-name">Advanced Dribbling Circuit</h3>
+                        <div class="exercise-meta">
+                            <span>⏱️ 20 min</span>
+                            <span>📊 Advanced</span>
+                            <span>🔥 200 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-card" data-category="strength" data-difficulty="intermediate">
+                    <div class="exercise-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop" alt="Strength">
+                        <div class="play-overlay">
+                            <span class="play-icon">▶</span>
+                        </div>
+                    </div>
+                    <div class="exercise-info">
+                        <span class="exercise-category" style="background: rgba(254, 228, 64, 0.1); color: var(--accent-warning);">Strength</span>
+                        <h3 class="exercise-name">Single-Leg Squats</h3>
+                        <div class="exercise-meta">
+                            <span>⏱️ 12 min</span>
+                            <span>📊 Intermediate</span>
+                            <span>🔥 150 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-card" data-category="fitness" data-difficulty="beginner">
+                    <div class="exercise-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&h=300&fit=crop" alt="Fitness">
+                        <div class="play-overlay">
+                            <span class="play-icon">▶</span>
+                        </div>
+                    </div>
+                    <div class="exercise-info">
+                        <span class="exercise-category">Fitness</span>
+                        <h3 class="exercise-name">Endurance Running</h3>
+                        <div class="exercise-meta">
+                            <span>⏱️ 30 min</span>
+                            <span>📊 Beginner</span>
+                            <span>🔥 180 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-card" data-category="tactical" data-difficulty="advanced">
+                    <div class="exercise-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=400&h=300&fit=crop" alt="Tactical">
+                        <div class="play-overlay">
+                            <span class="play-icon">▶</span>
+                        </div>
+                    </div>
+                    <div class="exercise-info">
+                        <span class="exercise-category" style="background: rgba(0, 187, 249, 0.1); color: var(--accent-secondary);">Tactical</span>
+                        <h3 class="exercise-name">Positional Play Analysis</h3>
+                        <div class="exercise-meta">
+                            <span>⏱️ 25 min</span>
+                            <span>📊 Advanced</span>
+                            <span>🔥 220 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-card" data-category="speed" data-difficulty="advanced">
+                    <div class="exercise-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1552674605-469523170273?w=400&h=300&fit=crop" alt="Agility">
+                        <div class="play-overlay">
+                            <span class="play-icon">▶</span>
+                        </div>
+                    </div>
+                    <div class="exercise-info">
+                        <span class="exercise-category">Speed & Agility</span>
+                        <h3 class="exercise-name">Ladder Agility Combo</h3>
+                        <div class="exercise-meta">
+                            <span>⏱️ 18 min</span>
+                            <span>📊 Advanced</span>
+                            <span>🔥 175 XP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Page -->
+        <div id="progress" class="page">
+            <h2 class="section-title">
+                <span>Performance</span> Analytics
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Speed Progress</h3>
+                        <span style="color: var(--accent-primary); font-size: 0.9rem;">+12% ↑</span>
+                    </div>
+                    <canvas id="speedChart"></canvas>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Strength Gains</h3>
+                        <span style="color: var(--accent-primary); font-size: 0.9rem;">+8% ↑</span>
+                    </div>
+                    <canvas id="strengthChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 2rem;">
+                <div class="chart-header">
+                    <h3 class="card-title">Overall Development</h3>
+                    <div class="chart-filters">
+                        <button class="filter-btn active" onclick="updateChart('week')">Week</button>
+                        <button class="filter-btn" onclick="updateChart('month')">Month</button>
+                        <button class="filter-btn" onclick="updateChart('year')">Year</button>
+                    </div>
+                </div>
+                <canvas id="mainChart" height="100"></canvas>
+            </div>
+
+            <h2 class="section-title">
+                <span>Weekly</span> Report Card
+            </h2>
+            
+            <div class="card">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div style="text-align: center; padding: 1.5rem; border-right: 1px solid var(--border-glass);">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">A-</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Overall Grade</div>
+                    </div>
+                    <div style="text-align: center; padding: 1.5rem; border-right: 1px solid var(--border-glass);">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--accent-primary);">4.2h</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Training Time</div>
+                    </div>
+                    <div style="text-align: center; padding: 1.5rem; border-right: 1px solid var(--border-glass);">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--accent-tertiary);">1,240</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">XP Earned</div>
+                    </div>
+                    <div style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--accent-warning);">92%</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Goal Completion</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Page -->
+        <div id="social" class="page">
+            <div style="display: grid; grid-template-columns: 1fr 350px; gap: 2rem;">
+                <div>
+                    <h2 class="section-title">
+                        <span>Global</span> Leaderboard
+                    </h2>
+                    
+                    <div class="leaderboard-list" style="margin-bottom: 2rem;">
+                        <div class="leaderboard-item">
+                            <div class="rank gold">1</div>
+                            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&h=100&fit=crop" class="leaderboard-avatar" alt="User">
+                            <div class="leaderboard-info">
+                                <div class="leaderboard-name">Marcus Johnson</div>
+                                <div class="leaderboard-team">Elite Academy U16</div>
+                            </div>
+                            <div class="leaderboard-xp">
+                                <div class="xp-number">12,450</div>
+                                <div class="xp-label">XP</div>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <div class="rank silver">2</div>
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" class="leaderboard-avatar" alt="User">
+                            <div class="leaderboard-info">
+                                <div class="leaderboard-name">Sarah Miller</div>
+                                <div class="leaderboard-team">Youth Stars FC</div>
+                            </div>
+                            <div class="leaderboard-xp">
+                                <div class="xp-number">11,890</div>
+                                <div class="xp-label">XP</div>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <div class="rank bronze">3</div>
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" class="leaderboard-avatar" alt="User">
+                            <div class="leaderboard-info">
+                                <div class="leaderboard-name">Jake Thompson</div>
+                                <div class="leaderboard-team">Metro United</div>
+                            </div>
+                            <div class="leaderboard-xp">
+                                <div class="xp-number">11,234</div>
+                                <div class="xp-label">XP</div>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <div class="rank">4</div>
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" class="leaderboard-avatar" alt="User">
+                            <div class="leaderboard-info">
+                                <div class="leaderboard-name">David Kim</div>
+                                <div class="leaderboard-team">City Youth</div>
+                            </div>
+                            <div class="leaderboard-xp">
+                                <div class="xp-number">10,567</div>
+                                <div class="xp-label">XP</div>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-item current-user">
+                            <div class="rank">5</div>
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" class="leaderboard-avatar" alt="User">
+                            <div class="leaderboard-info">
+                                <div class="leaderboard-name">Alex Chen (You)</div>
+                                <div class="leaderboard-team">Youth Academy U16</div>
+                            </div>
+                            <div class="leaderboard-xp">
+                                <div class="xp-number">9,840</div>
+                                <div class="xp-label">XP</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title">
+                        <span>Friends</span> Activity
+                    </h2>
+                    
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" class="activity-avatar" alt="User">
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <span class="activity-user">Sarah Miller</span>
+                                    <span class="activity-time">Just now</span>
+                                </div>
+                                <div class="activity-text">Earned the "Speed Demon" badge! 🏃‍♀️💨</div>
+                                <div class="activity-stats">
+                                    <span class="activity-stat">🏆 New Badge</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" class="activity-avatar" alt="User">
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <span class="activity-user">Jake Thompson</span>
+                                    <span class="activity-time">1h ago</span>
+                                </div>
+                                <div class="activity-text">Completed Week 5 of the Elite Program 💪</div>
+                                <div class="activity-stats">
+                                    <span class="activity-stat">⚡ 500 XP</span>
+                                    <span class="activity-stat">🔥 7 day streak</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card" style="margin-bottom: 1.5rem;">
+                        <div class="card-header">
+                            <h3 class="card-title">Your Ranking</h3>
+                        </div>
+                        <div style="text-align: center; padding: 2rem;">
+                            <div style="font-size: 4rem; font-weight: 700; color: var(--accent-primary); margin-bottom: 0.5rem;">#5</div>
+                            <div style="color: var(--text-secondary); margin-bottom: 1rem;">Top 5% globally</div>
+                            <div style="font-size: 0.9rem; color: var(--text-muted);">
+                                610 XP to reach #4
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Friends</h3>
+                            <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">+ Add</button>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" style="width: 40px; height: 40px; border-radius: 50%;" alt="Friend">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 0.9rem;">Sarah Miller</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Online</div>
+                                </div>
+                                <div style="width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 10px #00ff88;"></div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" style="width: 40px; height: 40px; border-radius: 50%;" alt="Friend">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 0.9rem;">Jake Thompson</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Training now</div>
+                                </div>
+                                <div style="width: 8px; height: 8px; background: var(--accent-warning); border-radius: 50%;"></div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&h=100&fit=crop" style="width: 40px; height: 40px; border-radius: 50%;" alt="Friend">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 0.9rem;">Marcus Johnson</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Offline</div>
+                                </div>
+                                <div style="width: 8px; height: 8px; background: var(--text-muted); border-radius: 50%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subscription Page -->
+        <div id="subscription" class="page">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto 3rem;">
+                <h2 class="section-title" style="justify-content: center;">
+                    <span>Choose</span> Your Plan
+                </h2>
+                <p style="color: var(--text-secondary);">Unlock your full potential with our premium training programs and advanced analytics.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-icon">🥉</div>
+                    <h3 class="pricing-name">Free</h3>
+                    <div class="pricing-price">$0<span>/month</span></div>
+                    <p class="pricing-desc">Perfect for getting started</p>
+                    <ul class="pricing-features">
+                        <li><span class="feature-check">✓</span> Basic exercise library</li>
+                        <li><span class="feature-check">✓</span> 2 training programs</li>
+                        <li><span class="feature-check">✓</span> Basic progress tracking</li>
+                        <li><span class="feature-check">✓</span> Community access</li>
+                        <li style="opacity: 0.3;"><span class="feature-check">✗</span> Advanced analytics</li>
+                        <li style="opacity: 0.3;"><span class="feature-check">✗</span> 1-on-1 coaching</li>
+                    </ul>
+                    <button class="btn btn-secondary" style="width: 100%;">Current Plan</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="pricing-icon">🥇</div>
+                    <h3 class="pricing-name">Pro</h3>
+                    <div class="pricing-price">$19<span>/month</span></div>
+                    <p class="pricing-desc">Best for serious athletes</p>
+                    <ul class="pricing-features">
+                        <li><span class="feature-check">✓</span> Full exercise library (245+)</li>
+                        <li><span class="feature-check">✓</span> All training programs</li>
+                        <li><span class="feature-check">✓</span> Advanced analytics & charts</li>
+                        <li><span class="feature-check">✓</span> Video analysis tools</li>
+                        <li><span class="feature-check">✓</span> Priority support</li>
+                        <li style="opacity: 0.3;"><span class="feature-check">✗</span> 1-on-1 coaching</li>
+                    </ul>
+                    <button class="btn btn-primary btn-glow" onclick="showToast('Redirecting to payment...', 'success')">Upgrade to Pro</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-icon">👨‍👩‍👧‍👦</div>
+                    <h3 class="pricing-name">Family</h3>
+                    <div class="pricing-price">$39<span>/month</span></div>
+                    <p class="pricing-desc">For up to 4 family members</p>
+                    <ul class="pricing-features">
+                        <li><span class="feature-check">✓</span> Everything in Pro</li>
+                        <li><span class="feature-check">✓</span> 4 separate profiles</li>
+                        <li><span class="feature-check">✓</span> Family leaderboard</li>
+                        <li><span class="feature-check">✓</span> Parent dashboard</li>
+                        <li><span class="feature-check">✓</span> 1-on-1 coaching (2x/month)</li>
+                        <li><span class="feature-check">✓</span> Custom training plans</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="showToast('Redirecting to payment...', 'success')">Choose Family</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon" id="toastIcon">✓</div>
+        <div class="toast-content">
+            <div class="toast-title" id="toastTitle">Success</div>
+            <div class="toast-message" id="toastMessage">Operation completed successfully</div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Exercise Details</h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div id="modalContent">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            if(pageId === 'progress') {
+                setTimeout(initCharts, 100);
+            }
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                navigateTo(link.getAttribute('data-page'));
+            });
+        });
+
+        // Skill Slider Update
+        function updateSkill(input, index) {
+            const value = input.value;
+            const fill = input.previousElementSibling;
+            const valueDisplay = input.parentElement.previousElementSibling.querySelector('.skill-value');
+            
+            fill.style.width = value + '%';
+            valueDisplay.textContent = value;
+            
+            // Color change based on value
+            if(value >= 80) {
+                fill.style.background = 'linear-gradient(90deg, #00f5d4, #00bbf9)';
+            } else if(value >= 60) {
+                fill.style.background = 'linear-gradient(90deg, #fee440, #f15bb5)';
+            } else {
+                fill.style.background = 'linear-gradient(90deg, #f15bb5, #ee4266)';
+            }
+        }
+
+        // Exercise Filter
+        function filterExercises() {
+            const search = document.getElementById('exerciseSearch').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            const difficulty = document.getElementById('difficultyFilter').value;
+            
+            document.querySelectorAll('.exercise-card').forEach(card => {
+                const name = card.querySelector('.exercise-name').textContent.toLowerCase();
+                const cardCategory = card.getAttribute('data-category');
+                const cardDifficulty = card.getAttribute('data-difficulty');
+                
+                const matchesSearch = name.includes(search);
+                const matchesCategory = category === 'all' || cardCategory === category;
+                const matchesDifficulty = difficulty === 'all' || cardDifficulty === difficulty;
+                
+                if(matchesSearch && matchesCategory && matchesDifficulty) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // Week Expansion
+        function expandWeek(card) {
+            if(card.classList.contains('locked')) return;
+            
+            document.querySelectorAll('.week-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            
+            showToast(`Loading Week ${card.querySelector('.week-number').textContent}...`, 'info');
+        }
+
+        // Toast Notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const title = document.getElementById('toastTitle');
+            const msg = document.getElementById('toastMessage');
+            
+            const icons = {
+                success: '✓',
+                info: 'ℹ',
+                warning: '⚠',
+                error: '✕'
+            };
+            
+            const titles = {
+                success: 'Success',
+                info: 'Info',
+                warning: 'Warning',
+                error: 'Error'
+            };
+            
+            icon.textContent = icons[type];
+            title.textContent = titles[type];
+            msg.textContent = message;
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Modal
+        function openModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal(event) {
+            if(!event || event.target.id === 'modal') {
+                document.getElementById('modal').classList.remove('active');
+            }
+        }
+
+        // Exercise Card Click
+        document.querySelectorAll('.exercise-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const name = card.querySelector('.exercise-name').textContent;
+                const category = card.querySelector('.exercise-category').textContent;
+                const meta = card.querySelector('.exercise-meta').innerHTML;
+                
+                const content = `
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: 1rem;">
+                            ▶️
+                        </div>
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="background: rgba(0,245,212,0.1); color: var(--accent-primary); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">${category}</span>
+                        </div>
+                        <div style="color: var(--text-secondary); margin-bottom: 1.5rem;">${meta}</div>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                            This exercise focuses on developing key athletic abilities. Follow the instructions carefully and maintain proper form throughout the session.
+                        </p>
+                    </div>
+                    <button class="btn btn-primary btn-glow" style="width: 100%;" onclick="showToast('Starting exercise...', 'success'); closeModal();">
+                        ▶ Start Exercise
+                    </button>
+                `;
+                
+                openModal(name, content);
+            });
+        });
+
+        // Charts
+        let chartsInitialized = false;
+        
+        function initCharts() {
+            if(chartsInitialized) return;
+            
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#a0a0b0' }
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { color: '#6b6b7b' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#6b6b7b' }
+                    }
+                }
+            };
+
+            // Speed Chart
+            new Chart(document.getElementById('speedChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                    datasets: [{
+                        label: 'Sprint Speed (mph)',
+                        data: [14.2, 14.5, 14.8, 15.1, 15.3, 15.6],
+                        borderColor: '#00f5d4',
+                        backgroundColor: 'rgba(0, 245, 212, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: chartOptions
+            });
+
+            // Strength Chart
+            new Chart(document.getElementById('strengthChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                    datasets: [{
+                        label: 'Power Score',
+                        data: [65, 68, 70, 72, 74, 76],
+                        backgroundColor: 'rgba(241, 91, 181, 0.6)',
+                        borderColor: '#f15bb5',
+                        borderWidth: 2
+                    }]
+                },
+                options: chartOptions
+            });
+
+            // Main Chart
+            new Chart(document.getElementById('mainChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [
+                        {
+                            label: 'Overall Rating',
+                            data: [72, 74, 75, 77, 79, 82],
+                            borderColor: '#00f5d4',
+                            backgroundColor: 'rgba(0, 245, 212, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: 'Fitness',
+                            data: [68, 70, 72, 74, 76, 78],
+                            borderColor: '#00bbf9',
+                            backgroundColor: 'transparent',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Technical',
+                            data: [75, 76, 77, 78, 80, 83],
+                            borderColor: '#f15bb5',
+                            backgroundColor: 'transparent',
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: chartOptions
+            });
+            
+            chartsInitialized = true;
+        }
+
+        function updateChart(period) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            showToast(`Updated to ${period} view`, 'info');
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            
+            if(nav.style.display === 'flex') {
+                nav.style.position = 'absolute';
+                nav.style.top = '100%';
+                nav.style.left = '0';
+                nav.style.right = '0';
+                nav.style.flexDirection = 'column';
+                nav.style.background = 'rgba(10, 10, 15, 0.95)';
+                nav.style.padding = '1rem';
+                nav.style.backdropFilter = 'blur(20px)';
+                nav.style.borderBottom = '1px solid var(--border-glass)';
+            }
+        }
+
+        // Initialize animations on load
+        window.addEventListener('load', () => {
+            // Animate progress rings
+            setTimeout(() => {
+                document.querySelectorAll('.progress-ring-fill').forEach(ring => {
+                    ring.style.strokeDashoffset = ring.getAttribute('stroke-dashoffset');
+                });
+            }, 500);
+            
+            // Animate XP bar
+            setTimeout(() => {
+                document.querySelector('.xp-bar').style.width = '75%';
+            }, 300);
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .exercise-card, .week-card, .badge-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add subscription page to nav
+        document.querySelector('.nav-links').innerHTML += '<li><a href="#" data-page="subscription">Pricing</a></li>';
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                navigateTo(link.getAttribute('data-page'));
+            });
+        });
+    </script>
+</body>
+</html>
