@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elena Voss | Actress • Writer • Director • Coach</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #c9a962;
+            --accent-light: #e8d5a3;
+            --text: #f5f5f5;
+            --text-muted: #888;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+
+        .display-text {
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.9;
+            font-weight: 300;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.9), transparent);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 2px;
+            background: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            z-index: -2;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 55%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            mask-image: linear-gradient(to right, transparent, black 30%);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 30%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            padding: 0 5%;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .hero-title {
+            margin-bottom: 2rem;
+        }
+
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title .line span {
+            display: block;
+            transform: translateY(100%);
+            animation: reveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        .hero-title .line:nth-child(2) span {
+            animation-delay: 0.2s;
+        }
+
+        .hero-title .line:nth-child(3) span {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes reveal {
+            to { transform: translateY(0); }
+        }
+
+        .hero-roles {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .role-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .role-tag::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 169, 98, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(201, 169, 98, 0.3);
+            transform: translateY(-5px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 10rem 5%;
+            background: var(--secondary);
+            position: relative;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            filter: grayscale(30%);
+            transition: all 0.5s ease;
+        }
+
+        .about-image:hover img {
+            filter: grayscale(0%);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .about-content h2 {
+            margin-bottom: 2rem;
+        }
+
+        .about-text {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover .skill-icon {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 10rem 5%;
+            background: var(--primary);
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .portfolio-header .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            color: var(--accent);
+        }
+
+        .filter-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            cursor: pointer;
+            group: portfolio;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.95), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .portfolio-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-links a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .portfolio-item.hidden {
+            display: none;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 10rem 5%;
+            background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .service-card:hover {
+            border-color: rgba(201, 169, 98, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .service-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 10rem 5%;
+            background: var(--primary);
+        }
+
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .product-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .product-image img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .product-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .product-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-subtitle {
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .product-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        .product-features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Courses Section */
+        .courses {
+            padding: 10rem 5%;
+            background: var(--secondary);
+        }
+
+        .courses-placeholder {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 5rem;
+            border: 2px dashed var(--glass-border);
+            border-radius: 20px;
+        }
+
+        .courses-placeholder h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .courses-placeholder p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .integration-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .badge {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 10rem 5%;
+            background: var(--primary);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .blog-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .blog-card:hover {
+            border-color: rgba(201, 169, 98, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .blog-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.1);
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .blog-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .blog-excerpt {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-locked {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 10rem 5%;
+            background: linear-gradient(180deg, var(--primary) 0%, #050505 100%);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: normal;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .modal-body {
+            padding: 3rem;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            background: #050505;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-grid,
+            .product-showcase,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-image {
+                width: 100%;
+                opacity: 0.3;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .hero-roles {
+                justify-content: center;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background: var(--secondary);
+                flex-direction: column;
+                padding: 6rem 2rem;
+                transition: right 0.4s ease;
+                border-left: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .mobile-menu.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .mobile-menu.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .portfolio-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                text-align: center;
+            }
+
+            .section-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--glass-border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">ELENA<span>VOSS</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#services">Coaching</a></li>
+            <li><a href="#products">Book</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#blog">Stories</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu" id="mobileMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&auto=format&fit=crop&q=80" alt="Elena Voss" class="hero-image">
+        <div class="hero-content">
+            <span class="hero-subtitle">Creative Artist & Wellness Expert</span>
+            <h1 class="hero-title display-text">
+                <div class="line"><span>Storyteller.</span></div>
+                <div class="line"><span>Visionary.</span></div>
+                <div class="line"><span>Guide.</span></div>
+            </h1>
+            <div class="hero-roles">
+                <span class="role-tag">Actress</span>
+                <span class="role-tag">Writer</span>
+                <span class="role-tag">Director</span>
+                <span class="role-tag">Dietitian</span>
+                <span class="role-tag">Mindset Coach</span>
+            </div>
+            <div class="hero-cta">
+                <a href="#services" class="btn btn-primary">Work With Me</a>
+                <a href="#portfolio" class="btn btn-secondary">View Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-image fade-in">
+                <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&auto=format&fit=crop&q=80" alt="Elena Voss Portrait">
+            </div>
+            <div class="about-content fade-in">
+                <h2 class="section-title">The Many Faces<br>of Creativity</h2>
+                <p class="about-text">
+                    I'm Elena Voss—a multi-passionate creative who believes that art and wellness are intrinsically connected. With over 15 years in the entertainment industry and a background in nutritional science, I've crafted a unique approach to storytelling that nourishes both body and soul.
+                </p>
+                <p class="about-text">
+                    Whether I'm commanding the screen, directing behind the camera, writing stories that move audiences, or coaching clients toward their healthiest selves—my mission remains the same: to inspire transformation through authentic expression.
+                </p>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon">🎭</div>
+                        <div>
+                            <strong>Acting</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">TV, Film & Theatre</p>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">✍️</div>
+                        <div>
+                            <strong>Writing</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Screenplays & Prose</p>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🎬</div>
+                        <div>
+                            <strong>Directing</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Independent Film</p>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🥗</div>
+                        <div>
+                            <strong>Nutrition</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Holistic Dietetics</p>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🧠</div>
+                        <div>
+                            <strong>Coaching</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Mindset & Performance</p>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🎪</div>
+                        <div>
+                            <strong>Teaching</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Workshops & Masterclasses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="portfolio-header fade-in">
+            <h2 class="section-title">Selected Works</h2>
+        </div>
+        <div class="portfolio-filters fade-in">
+            <button class="filter-btn active" data-filter="all">All Work</button>
+            <button class="filter-btn" data-filter="acting">Acting</button>
+            <button class="filter-btn" data-filter="writing">Writing</button>
+            <button class="filter-btn" data-filter="directing">Directing</button>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid">
+            <!-- Acting Items -->
+            <div class="portfolio-item" data-category="acting" onclick="openModal('shadows')">
+                <img src="https://images.unsplash.com/photo-1594909122849-11daa2a0cf2b?w=600&auto=format&fit=crop&q=80" alt="Shadows of Tomorrow">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Feature Film</span>
+                    <h3 class="portfolio-title">Shadows of Tomorrow</h3>
+                    <div class="portfolio-links">
+                        <a href="#" onclick="event.stopPropagation()">Watch Trailer</a>
+                        <a href="https://imdb.com" target="_blank" onclick="event.stopPropagation()">IMDb →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="acting" onclick="openModal('midnight')">
+                <img src="https://images.unsplash.com/photo-1578022761797-b8636ac1773c?w=600&auto=format&fit=crop&q=80" alt="The Midnight Hour">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">TV Series</span>
+                    <h3 class="portfolio-title">The Midnight Hour</h3>
+                    <div class="portfolio-links">
+                        <a href="#" onclick="event.stopPropagation()">Watch Clip</a>
+                        <a href="https://imdb.com" target="_blank" onclick="event.stopPropagation()">IMDb →</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Writing Items -->
+            <div class="portfolio-item" data-category="writing" onclick="openModal('memoir')">
+                <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&auto=format&fit=crop&q=80" alt="The Art of Becoming">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Memoir</span>
+                    <h3 class="portfolio-title">The Art of Becoming</h3>
+                    <div class="portfolio-links">
+                        <a href="#" onclick="event.stopPropagation()">Read Excerpt</a>
+                        <a href="#" onclick="event.stopPropagation()">Buy Now →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="writing" onclick="openModal('screenplay')">
+                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80" alt="Echoes of Paris">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Screenplay</span>
+                    <h3 class="portfolio-title">Echoes of Paris</h3>
+                    <div class="portfolio-links">
+                        <a href="#" onclick="event.stopPropagation()">Read Synopsis</a>
+                        <a href="#" onclick="event.stopPropagation()">In Development →</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Directing Items -->
+            <div class="portfolio-item" data-category="directing" onclick="openModal('fragments')">
+                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80" alt="Fragments of Light">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Short Film</span>
+                    <h3 class="portfolio-title">Fragments of Light</h3>
+                    <div class="portfolio-links">
+                        <a href="#" onclick="event.stopPropagation()">Watch Film</a>
+                        <a href="#" onclick="event.stopPropagation()">Festival Awards →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="directing" onclick="openModal('documentary')">
+                <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&auto=format&fit=crop&q=80" alt="Nourished">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Documentary</span>
+                    <h3 class="portfolio-title">Nourished</h3>
+                    <div class="portfolio-links">
+                        <a href="#" onclick="event.stopPropagation()">Watch Trailer</a>
+                        <a href="#" onclick="event.stopPropagation()">Streaming Now →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <h2 class="section-title fade-in" style="text-align: center; display: block; margin-bottom: 5rem;">Coaching & Services</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <span class="service-icon">🎯</span>
+                    <h3 class="service-title">Performance Coaching</h3>
+                    <p class="service-desc">One-on-one sessions to unlock your authentic presence, overcome stage fright, and deliver powerful performances in any medium.</p>
+                    <div class="service-price">$250<span style="font-size: 1rem; color: var(--text-muted);">/session</span></div>
+                    <a href="#contact" class="btn btn-secondary" style="width: 100%; text-align: center;">Book a Call</a>
+                </div>
+                <div class="service-card fade-in">
+                    <span class="service-icon">🥗</span>
+                    <h3 class="service-title">Nutrition Consulting</h3>
+                    <p class="service-desc">Holistic dietary plans tailored for creative professionals. Optimize energy, focus, and wellbeing for sustainable success.</p>
+                    <div class="service-price">$400<span style="font-size: 1rem; color: var(--text-muted);">/month</span></div>
+                    <a href="#contact" class="btn btn-secondary" style="width: 100%; text-align: center;">Book a Call</a>
+                </div>
+                <div class="service-card fade-in">
+                    <span class="service-icon">🧘</span>
+                    <h3 class="service-title">Mindset Mastery</h3>
+                    <p class="service-desc">Transform limiting beliefs, build unshakeable confidence, and develop the mental resilience required for creative excellence.</p>
+                    <div class="service-price">$350<span style="font-size: 1rem; color: var(--text-muted);">/session</span></div>
+                    <a href="#contact" class="btn btn-secondary" style="width: 100%; text-align: center;">Book a Call</a>
+                </div>
+                <div class="service-card fade-in">
+                    <span class="service-icon">🎪</span>
+                    <h3 class="service-title">Group Workshops</h3>
+                    <p class="service-desc">Intensive weekend workshops combining acting technique, wellness practices, and creative breakthrough exercises.</p>
+                    <div class="service-price">$1,200<span style="font-size: 1rem; color: var(--text-muted);">/weekend</span></div>
+                    <a href="#contact" class="btn btn-secondary" style="width: 100%; text-align: center;">Book a Call</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="product-showcase">
+            <div class="product-image fade-in">
+                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&auto=format&fit=crop&q=80" alt="The Nourished Artist Book">
+                <span class="product-badge">Bestseller</span>
+            </div>
+            <div class="product-content fade-in">
+                <span class="product-subtitle">Available Now</span>
+                <h3>The Nourished Artist</h3>
+                <p class="product-desc">
+                    A revolutionary guide for creative professionals seeking to optimize their physical and mental wellbeing without sacrificing their artistic edge. Drawing from my dual expertise in performance and nutrition, this book reveals the secrets to sustainable creative energy.
+                </p>
+                <ul class="product-features">
+                    <li>30-day wellness blueprint for creatives</li>
+                    <li>Performance-enhancing nutrition protocols</li>
+                    <li>Mindfulness techniques for flow states</li>
+                    <li>Exclusive recipes from Hollywood sets</li>
+                    <li>Signed first edition available</li>
+                </ul>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="#" class="btn btn-primary">Buy Now — $28</a>
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">Also available on Amazon & Audible</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="courses-placeholder fade-in">
+            <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🎓</span>
+            <h3>Online Learning Center</h3>
+            <p>Comprehensive digital courses launching soon. Masterclasses in acting technique, wellness integration, and creative entrepreneurship.</p>
+            <a href="#contact" class="btn btn-secondary">Join the Waitlist</a>
+            <div class="integration-badges">
+                <span class="badge">Kajabi Ready</span>
+                <span class="badge">Teachable Integration</span>
+                <span class="badge">Mobile Optimized</span>
+                <span class="badge">Certificate Programs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <h2 class="section-title fade-in" style="text-align: center; display: block; margin-bottom: 5rem;">Stories & Insights</h2>
+            <div class="blog-grid">
+                <article class="blog-card fade-in">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop&q=80" alt="Blog post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Jan 15, 2026</span>
+                            <span>•</span>
+                            <span>5 min read</span>
+                        </div>
+                        <h3 class="blog-title">The Morning Ritual That Changed My Career</h3>
+                        <p class="blog-excerpt">How a simple 20-minute practice transformed my auditions, my energy, and my approach to the craft...</p>
+                        <a href="#" class="btn btn-secondary" style="padding: 0.75rem 1.5rem; font-size: 0.8rem;">Read Story</a>
+                    </div>
+                </article>
+                <article class="blog-card fade-in">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80" alt="Blog post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Jan 8, 2026</span>
+                            <span>•</span>
+                            <span>8 min read</span>
+                            <span style="color: var(--accent);">★ Premium</span>
+                        </div>
+                        <h3 class="blog-title">Behind the Scenes: Directing My First Feature</h3>
+                        <p class="blog-excerpt">The untold challenges, breakthroughs, and lessons from the set of "Fragments of Light"...</p>
+                        <span class="blog-locked">
+                            <span>🔒</span> Members Only
+                        </span>
+                    </div>
+                </article>
+                <article class="blog-card fade-in">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&auto=format&fit=crop&q=80" alt="Blog post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Dec 28, 2025</span>
+                            <span>•</span>
+                            <span>6 min read</span>
+                        </div>
+                        <h3 class="blog-title">Nutrition for the Creative Brain</h3>
+                        <p class="blog-excerpt">Science-backed foods that enhance cognitive function, memory retention, and creative flow states...</p>
+                        <a href="#" class="btn btn-secondary" style="padding: 0.75rem 1.5rem; font-size: 0.8rem;">Read Story</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info fade-in">
+                <h3>Let's Create Something Beautiful</h3>
+                <p style="color: var(--text-muted); margin-bottom: 3rem; font-size: 1.1rem; line-height: 1.8;">
+                    Whether you're looking to collaborate, book a coaching session, or simply say hello—I'd love to hear from you.
+                </p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i>✉️</i>
+                        <div>
+                            <strong style="color: var(--text); display: block; margin-bottom: 0.25rem;">Email</strong>
+                            hello@elenavoss.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>📍</i>
+                        <div>
+                            <strong style="color: var(--text); display: block; margin-bottom: 0.25rem;">Location</strong>
+                            Los Angeles, CA & New York, NY
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>🎭</i>
+                        <div>
+                            <strong style="color: var(--text); display: block; margin-bottom: 0.25rem;">Representation</strong>
+                            Creative Artists Agency (CAA)
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <strong style="color: var(--text); display: block; margin-bottom: 1rem;">Follow the Journey</strong>
+                    <div class="social-links">
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="Twitter">🐦</a>
+                        <a href="#" title="LinkedIn">💼</a>
+                        <a href="#" title="YouTube">🎬</a>
+                        <a href="#" title="IMDb">⭐</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form fade-in">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">I'm Interested In</label>
+                        <input type="text" id="interest" name="interest" placeholder="Coaching, Collaboration, Press, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" required placeholder="Tell me about your project or inquiry..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2026 Elena Voss. All rights reserved. Crafted with passion & purpose.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="portfolioModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Portfolio Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.classList.remove('hidden');
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.classList.add('hidden');
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Modal Functionality
+        const modalContent = {
+            'shadows': {
+                title: 'Shadows of Tomorrow',
+                category: 'Feature Film • Lead Role',
+                image: 'https://images.unsplash.com/photo-1594909122849-11daa2a0cf2b?w=900&auto=format&fit=crop&q=80',
+                description: 'A gripping psychological thriller where I played the complex character of Dr. Sarah Chen, a neuroscientist grappling with ethical boundaries in memory manipulation research. The film premiered at Sundance and earned critical acclaim for its nuanced exploration of identity and consciousness.',
+                details: ['Director: Marcus Webb', 'Year: 2025', 'Role: Dr. Sarah Chen', 'Awards: Best Actress Nomination - Sundance']
+            },
+            'midnight': {
+                title: 'The Midnight Hour',
+                category: 'TV Series • Series Regular',
+                image: 'https://images.unsplash.com/photo-1578022761797-b8636ac1773c?w=900&auto=format&fit=crop&q=80',
+                description: 'A 10-episode limited series for HBO following the mysterious happenings in a small coastal town. I portray Detective Elena Ruiz, whose investigation into a series of supernatural events forces her to confront her own past trauma.',
+                details: ['Network: HBO', 'Episodes: 10', 'Role: Detective Elena Ruiz', 'Status: Streaming Now']
+            },
+            'memoir': {
+                title: 'The Art of Becoming',
+                category: 'Published Memoir',
+                image: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=900&auto=format&fit=crop&q=80',
+                description: 'My debut memoir chronicles the journey from a small-town theatre kid to Hollywood professional, interweaving lessons learned on set with insights from my wellness practice. A candid look at the entertainment industry and the personal growth required to thrive within it.',
+                details: ['Publisher: Penguin Random House', 'Pages: 320', 'Reviews: NYT Bestseller', 'Available: Hardcover, Digital, Audio']
+            },
+            'screenplay': {
+                title: 'Echoes of Paris',
+                category: 'Original Screenplay',
+                image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80',
+                description: 'A romantic drama set in 1960s Paris following an American jazz singer and a French photographer whose paths cross during the student protests of May 1968. Currently in development with Searchlight Pictures.',
+                details: ['Genre: Period Drama', 'Status: Pre-production', 'Director: TBA', 'Producer: Elena Voss Productions']
+            },
+            'fragments': {
+                title: 'Fragments of Light',
+                category: 'Short Film • Director',
+                image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80',
+                description: 'My directorial debut explores grief and healing through the lens of a woman processing her mother\'s death by organizing her photography archive. Winner of the Short Film Jury Award at SXSW and selected for Cannes Film Festival\'s Short Film Corner.',
+                details: ['Runtime: 18 minutes', 'Festival: SXSW, Cannes', 'Awards: Jury Prize Winner', 'Distribution: streaming on MUBI']
+            },
+            'documentary': {
+                title: 'Nourished',
+                category: 'Documentary • Director/Producer',
+                image: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=900&auto=format&fit=crop&q=80',
+                description: 'An intimate documentary following five artists who transformed their careers through holistic wellness practices. Features candid interviews with performers, writers, and musicians who share their journeys from burnout to balance.',
+                details: ['Runtime: 85 minutes', 'Platform: Netflix', 'Role: Director/Producer', 'Release: 2025']
+            }
+        };
+
+        function openModal(projectId) {
+            const modal = document.getElementById('portfolioModal');
+            const modalBody = document.getElementById('modalBody');
+            const content = modalContent[projectId];
+
+            if (content) {
+                modalBody.innerHTML = `
+                    <img src="${content.image}" alt="${content.title}" class="modal-image">
+                    <span style="color: var(--accent); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.85rem;">${content.category}</span>
+                    <h2 style="font-size: 2.5rem; margin: 1rem 0 1.5rem;">${content.title}</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">${content.description}</p>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--glass-border);">
+                        ${content.details.map(detail => `
+                            <div style="color: var(--text-muted); font-size: 0.9rem;">
+                                <span style="color: var(--accent);">▸</span> ${detail}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('portfolioModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('portfolioModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Intersection Observer for Fade-in Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form Submission Handler
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.textContent = 'Message Sent!';
+                btn.style.background = '#4ade80';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    btn.style.background = '';
+                    e.target.reset();
+                }, 2000);
+            }, 1500);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
