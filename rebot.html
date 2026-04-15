@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Memorial Services - Compassionate Care Chat</title>
+    <style>
+        :root {
+            /* Soft, calming color palette */
+            --primary: #7B9E87;
+            --primary-light: #A8C5A8;
+            --primary-dark: #5A7A65;
+            --secondary: #E8D5C4;
+            --accent: #D4A574;
+            --background: #FAF9F7;
+            --surface: #FFFFFF;
+            --text-primary: #3D4A3D;
+            --text-secondary: #6B7B6B;
+            --text-light: #9AA89A;
+            --border: #E5E8E5;
+            --shadow: rgba(61, 74, 61, 0.08);
+            --shadow-hover: rgba(61, 74, 61, 0.12);
+            
+            /* Status colors */
+            --success: #7B9E87;
+            --error: #C98B8B;
+            --warning: #D4A574;
+            
+            /* Spacing */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+        }
+
+        [data-theme="dark"] {
+            --primary: #8FBC8F;
+            --primary-light: #A8D5A8;
+            --primary-dark: #6B8E6B;
+            --secondary: #4A403A;
+            --accent: #C9A86C;
+            --background: #1A1F1A;
+            --surface: #2A302A;
+            --text-primary: #E8F0E8;
+            --text-secondary: #A8B8A8;
+            --text-light: #6B7B6B;
+            --border: #3A453A;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Demo page content */
+        .demo-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .demo-content h1 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+        }
+
+        .demo-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* Floating Chat Widget Button */
+        .chat-widget-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--shadow), 0 2px 8px var(--shadow-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .chat-widget-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 30px var(--shadow-hover);
+        }
+
+        .chat-widget-button:active {
+            transform: scale(0.95);
+        }
+
+        .chat-widget-button svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+            transition: transform 0.3s ease;
+        }
+
+        .chat-widget-button.active svg {
+            transform: rotate(90deg);
+        }
+
+        .chat-widget-button .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--surface);
+            display: none;
+        }
+
+        /* Chat Container */
+        .chat-container {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 400px;
+            max-width: calc(100vw - 40px);
+            height: 600px;
+            max-height: calc(100vh - 140px);
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 60px var(--shadow-hover);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .chat-container.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Chat Header */
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+
+        .chat-header-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-avatar {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .chat-title {
+            flex: 1;
+        }
+
+        .chat-title h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .chat-title p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .header-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .header-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        /* Progress Indicator */
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            position: absolute;
+            bottom: 8px;
+            right: 20px;
+            font-size: 0.7rem;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Chat Messages Area */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: var(--background);
+            scroll-behavior: smooth;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        /* Message Bubbles */
+        .message {
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: messageAppear 0.4s ease forwards;
+        }
+
+        @keyframes messageAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-bot {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .message-bot .avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .message-content {
+            max-width: 85%;
+        }
+
+        .message-bubble {
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .message-bot .message-bubble {
+            background: var(--surface);
+            color: var(--text-primary);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-user {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .message-user .message-bubble {
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 4px;
+            padding: 0 4px;
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 6px;
+            padding: 18px;
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            border-bottom-left-radius: 4px;
+            width: fit-content;
+            box-shadow: 0 2px 8px var(--shadow);
+            margin-bottom: 16px;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Input Options */
+        .input-options {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .option-btn {
+            padding: 10px 18px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .option-btn.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* Cards for selections */
+        .selection-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .selection-card {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .selection-card:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .selection-card.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .selection-card .card-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .card-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Text Input */
+        .text-input-container {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .text-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-xl);
+            font-size: 0.95rem;
+            background: var(--surface);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .text-input:focus {
+            border-color: var(--primary);
+        }
+
+        .send-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .send-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .send-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        /* Chat Input Area */
+        .chat-input-area {
+            padding: 16px 20px;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .quick-action-btn {
+            padding: 8px 14px;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .quick-action-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            border-color: var(--primary-light);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-xl);
+            font-size: 0.95rem;
+            background: var(--background);
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+            background: var(--surface);
+        }
+
+        .input-action-btn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .input-action-btn:hover {
+            background: var(--background);
+        }
+
+        .input-action-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-secondary);
+        }
+
+        /* Quote Display */
+        .quote-container {
+            background: linear-gradient(135deg, var(--secondary), var(--background));
+            border: 2px solid var(--primary-light);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-top: 12px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quote-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quote-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .quote-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .quote-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .quote-breakdown {
+            margin-bottom: 16px;
+        }
+
+        .quote-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .quote-item.total {
+            border-top: 2px solid var(--border);
+            margin-top: 8px;
+            padding-top: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .quote-note {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-style: italic;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Loading State */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(250, 249, 247, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 16px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .chat-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                max-width: 100%;
+                height: 100%;
+                max-height: 100%;
+                border-radius: 0;
+                bottom: 0;
+                right: 0;
+            }
+
+            .chat-widget-button {
+                bottom: 20px;
+                right: 20px;
+                width: 56px;
+                height: 56px;
+            }
+
+            .demo-content h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Focus visible for keyboard navigation */
+        button:focus-visible,
+        input:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Checkbox styling for add-ons */
+        .addon-list {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .addon-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .addon-item:hover {
+            border-color: var(--primary-light);
+        }
+
+        .addon-item.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .addon-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .addon-item.selected .addon-checkbox {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .addon-checkbox::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .addon-item.selected .addon-checkbox::after {
+            opacity: 1;
+        }
+
+        .addon-info {
+            flex: 1;
+        }
+
+        .addon-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .addon-price {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Restart button */
+        .restart-btn {
+            margin-top: 16px;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .restart-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Content -->
+    <div class="demo-content">
+        <h1>Pet Memorial Services</h1>
+        <p>Compassionate end-of-life care for your beloved companions. Click the chat button in the bottom right corner to receive a personalized quote and guidance through our services.</p>
+    </div>
+
+    <!-- Chat Widget Button -->
+    <button class="chat-widget-button" id="chatToggle" aria-label="Open chat">
+        <span class="notification-badge"></span>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+            <path d="M7 9h10v2H7zm0-3h10v2H7z"/>
+        </svg>
+    </button>
+
+    <!-- Chat Container -->
+    <div class="chat-container" id="chatContainer" role="dialog" aria-label="Chat window">
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Calculating your quote...</p>
+        </div>
+
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div class="chat-header-content">
+                <div class="chat-avatar">🕊️</div>
+                <div class="chat-title">
+                    <h3>Sarah</h3>
+                    <p>Memorial Services Guide</p>
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn" id="themeToggle" aria-label="Toggle dark mode">
+                        <svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    </button>
+                    <button class="header-btn" id="closeChat" aria-label="Close chat">
+                        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-text" id="progressText">Step 1 of 6</span>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be dynamically inserted here -->
+        </div>
+
+        <!-- Chat Input Area -->
+        <div class="chat-input-area">
+            <div class="quick-actions" id="quickActions">
+                <button class="quick-action-btn" onclick="chatApp.handleQuickAction('pricing')">View Pricing</button>
+                <button class="quick-action-btn" onclick="chatApp.handleQuickAction('services')">Our Services</button>
+                <button class="quick-action-btn" onclick="chatApp.handleQuickAction('support')">Speak to someone</button>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." aria-label="Message input">
+                <button class="input-action-btn" id="sendBtn" aria-label="Send message">
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Pet Memorial Chatbot Application
+         * 
+         * Architecture:
+         * - ChatApp: Main controller class managing UI state and flow
+         * - APIService: Mock API service for pricing calculations (replace with real backend)
+         * - ConversationFlow: Step-by-step conversation logic
+         * 
+         * Integration Points:
+         * 1. Replace mockApiCall() with actual fetch() to your Node.js/Python backend
+         * 2. WebSocket integration can be added for real-time support
+         * 3. Analytics tracking can be hooked into message events
+         */
+
+        class PetMemorialChatbot {
+            constructor() {
+                this.currentStep = 0;
+                this.userData = {
+                    petWeight: null,
+                    postcode: null,
+                    timeOfDay: null,
+                    cremationType: null,
+                    containerType: null,
+                    addons: []
+                };
+                this.isOpen = false;
+                this.messageHistory = [];
+                
+                // Conversation flow configuration
+                this.conversationSteps = [
+                    {
+                        id: 'welcome',
+                        type: 'message',
+                        content: "I'm so sorry you're going through this. I'm here to help you navigate this difficult time with compassion and care. I'll gently guide you through a few steps to help you understand your options and provide you with a personalized quote.",
+                        delay: 1000
+                    },
+                    {
+                        id: 'petWeight',
+                        type: 'selection',
+                        question: "To give you an accurate quote, could you tell me approximately how much your beloved pet weighs?",
+                        options: [
+                            { value: 'small', label: 'Small', desc: 'Under 15 lbs', icon: '🐕' },
+                            { value: 'medium', label: 'Medium', desc: '15-50 lbs', icon: '🐕' },
+                            { value: 'large', label: 'Large', desc: '51-100 lbs', icon: '🐕' },
+                            { value: 'xlarge', label: 'Extra Large', desc: 'Over 100 lbs', icon: '🐕' }
+                        ]
+                    },
+                    {
+                        id: 'postcode',
+                        type: 'input',
+                        question: "Thank you. What's your postcode? This helps us calculate any travel fees and confirm service availability in your area.",
+                        placeholder: "Enter your postcode...",
+                        validation: (val) => val.length >= 3
+                    },
+                    {
+                        id: 'timeOfDay',
+                        type: 'selection',
+                        question: "When would you prefer our team to visit? We understand timing is important during this sensitive time.",
+                        options: [
+                            { value: 'morning', label: 'Morning', desc: '8:00 AM - 12:00 PM', icon: '🌅' },
+                            { value: 'afternoon', label: 'Afternoon', desc: '12:00 PM - 5:00 PM', icon: '☀️' },
+                            { value: 'evening', label: 'Evening', desc: '5:00 PM - 8:00 PM', icon: '🌙' },
+                            { value: 'anytime', label: 'Anytime', desc: 'Most flexible', icon: '✓' }
+                        ]
+                    },
+                    {
+                        id: 'cremationType',
+                        type: 'cards',
+                        question: "Which type of cremation service feels right for you and your family?",
+                        options: [
+                            { 
+                                value: 'communal', 
+                                label: 'Communal', 
+                                desc: 'Multiple pets together, ashes scattered in memorial garden', 
+                                priceNote: 'Most affordable',
+                                icon: '🌸'
+                            },
+                            { 
+                                value: 'individual', 
+                                label: 'Individual', 
+                                desc: 'Partitioned cremation, ashes returned to you', 
+                                priceNote: 'Mid-range',
+                                icon: '🕊️'
+                            },
+                            { 
+                                value: 'private', 
+                                label: 'Private', 
+                                desc: 'Solo cremation, guaranteed 100% your pet only', 
+                                priceNote: 'Premium',
+                                icon: '💙'
+                            }
+                        ]
+                    },
+                    {
+                        id: 'container',
+                        type: 'cards',
+                        question: "How would you like to receive your pet's ashes? (If applicable)",
+                        options: [
+                            { value: 'basic', label: 'Basic Container', desc: 'Simple, dignified container included', icon: '📦' },
+                            { value: 'wooden', label: 'Wooden Urn', desc: 'Handcrafted cedar with lock & key', icon: '🌳' },
+                            { value: 'ceramic', label: 'Ceramic Urn', desc: 'Elegant, customizable design', icon: '🏺' },
+                            { value: 'biodegradable', label: 'Biodegradable', desc: 'Eco-friendly, for garden burial', icon: '🌱' }
+                        ]
+                    },
+                    {
+                        id: 'addons',
+                        type: 'checkbox',
+                        question: "Would you like to add any of these memorial options?",
+                        options: [
+                            { value: 'pawprint', label: 'Clay Paw Print', price: '$35', desc: 'Lasting impression of their paw' },
+                            { value: 'fur', label: 'Fur Clipping Keepsake', price: '$25', desc: 'Preserved in memorial case' },
+                            { value: 'transport', label: 'Home Transportation', price: '$65', desc: 'We come to your home' },
+                            { value: 'witness', label: 'Witnessed Cremation', price: '$75', desc: 'Be present at the start' },
+                            { value: 'rush', label: 'Same-Day Service', price: '$95', desc: 'Priority processing' }
+                        ]
+                    }
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.cacheDOM();
+                this.bindEvents();
+                this.updateProgress();
+            }
+
+            cacheDOM() {
+                this.elements = {
+                    toggle: document.getElementById('chatToggle'),
+                    container: document.getElementById('chatContainer'),
+                    messages: document.getElementById('chatMessages'),
+                    input: document.getElementById('chatInput'),
+                    sendBtn: document.getElementById('sendBtn'),
+                    closeBtn: document.getElementById('closeChat'),
+                    themeToggle: document.getElementById('themeToggle'),
+                    progressFill: document.getElementById('progressFill'),
+                    progressText: document.getElementById('progressText'),
+                    loadingOverlay: document.getElementById('loadingOverlay'),
+                    quickActions: document.getElementById('quickActions')
+                };
+            }
+
+            bindEvents() {
+                // Toggle chat
+                this.elements.toggle.addEventListener('click', () => this.toggleChat());
+                this.elements.closeBtn.addEventListener('click', () => this.toggleChat());
+                
+                // Send message
+                this.elements.sendBtn.addEventListener('click', () => this.handleTextInput());
+                this.elements.input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.handleTextInput();
+                });
+
+                // Theme toggle
+                this.elements.themeToggle.addEventListener('click', () => this.toggleTheme());
+
+                // Close on escape
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) this.toggleChat();
+                });
+            }
+
+            toggleChat() {
+                this.isOpen = !this.isOpen;
+                this.elements.container.classList.toggle('active', this.isOpen);
+                this.elements.toggle.classList.toggle('active', this.isOpen);
+                
+                if (this.isOpen && this.messageHistory.length === 0) {
+                    this.startConversation();
+                }
+            }
+
+            toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('chatTheme', newTheme);
+            }
+
+            updateProgress() {
+                const totalSteps = this.conversationSteps.length - 1; // Exclude welcome
+                const currentStepNum = Math.max(0, this.currentStep - 1);
+                const progress = (currentStepNum / totalSteps) * 100;
+                
+                this.elements.progressFill.style.width = `${progress}%`;
+                this.elements.progressText.textContent = 
+                    this.currentStep === 0 ? 'Getting started' : `Step ${currentStepNum} of ${totalSteps}`;
+            }
+
+            async startConversation() {
+                await this.showTyping();
+                await this.addBotMessage(this.conversationSteps[0].content);
+                await this.delay(500);
+                this.proceedToStep(1);
+            }
+
+            async proceedToStep(stepIndex) {
+                this.currentStep = stepIndex;
+                this.updateProgress();
+                
+                if (stepIndex >= this.conversationSteps.length) {
+                    await this.generateQuote();
+                    return;
+                }
+
+                const step = this.conversationSteps[stepIndex];
+                await this.showTyping();
+                await this.addBotMessage(step.question);
+                
+                this.renderInputOptions(step);
+            }
+
+            renderInputOptions(step) {
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'input-options';
+                optionsContainer.id = 'currentOptions';
+
+                switch(step.type) {
+                    case 'selection':
+                        step.options.forEach(opt => {
+                            const btn = document.createElement('button');
+                            btn.className = 'option-btn';
+                            btn.innerHTML = `${opt.icon} ${opt.label}`;
+                            btn.onclick = () => this.handleSelection(step.id, opt.value, opt.label);
+                            optionsContainer.appendChild(btn);
+                        });
+                        break;
+
+                    case 'cards':
+                        optionsContainer.className = 'selection-cards';
+                        step.options.forEach(opt => {
+                            const card = document.createElement('div');
+                            card.className = 'selection-card';
+                            card.innerHTML = `
+                                <div class="card-icon">${opt.icon}</div>
+                                <div class="card-title">${opt.label}</div>
+                                <div class="card-desc">${opt.desc}</div>
+                                ${opt.priceNote ? `<div class="card-desc" style="margin-top:4px;color:var(--primary);font-weight:500;">${opt.priceNote}</div>` : ''}
+                            `;
+                            card.onclick = () => this.handleSelection(step.id, opt.value, opt.label, card);
+                            optionsContainer.appendChild(card);
+                        });
+                        break;
+
+                    case 'input':
+                        const inputWrapper = document.createElement('div');
+                        inputWrapper.className = 'text-input-container';
+                        inputWrapper.innerHTML = `
+                            <input type="text" class="text-input" placeholder="${step.placeholder}" id="stepInput">
+                            <button class="send-btn" onclick="chatApp.handleStepInput('${step.id}')">
+                                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                            </button>
+                        `;
+                        optionsContainer.appendChild(inputWrapper);
+                        setTimeout(() => document.getElementById('stepInput')?.focus(), 100);
+                        break;
+
+                    case 'checkbox':
+                        optionsContainer.className = 'addon-list';
+                        step.options.forEach(opt => {
+                            const item = document.createElement('div');
+                            item.className = 'addon-item';
+                            item.innerHTML = `
+                                <div class="addon-checkbox"></div>
+                                <div class="addon-info">
+                                    <div class="addon-name">${opt.label}</div>
+                                    <div class="addon-price">${opt.price} — ${opt.desc}</div>
+                                </div>
+                            `;
+                            item.onclick = () => this.handleCheckboxToggle(opt.value, item);
+                            optionsContainer.appendChild(item);
+                        });
+                        
+                        const continueBtn = document.createElement('button');
+                        continueBtn.className = 'option-btn';
+                        continueBtn.style.marginTop = '12px';
+                        continueBtn.style.width = '100%';
+                        continueBtn.textContent = 'Continue';
+                        continueBtn.onclick = () => this.handleCheckboxConfirm(step.id);
+                        optionsContainer.appendChild(continueBtn);
+                        break;
+                }
+
+                this.elements.messages.appendChild(optionsContainer);
+                this.scrollToBottom();
+            }
+
+            async handleSelection(stepId, value, label, element) {
+                // Remove previous options
+                const options = document.getElementById('currentOptions');
+                if (options) {
+                    if (element) {
+                        // Visual feedback
+                        element.classList.add('selected');
+                        await this.delay(200);
+                    }
+                    options.remove();
+                }
+
+                // Store data
+                this.userData[stepId] = value;
+                
+                // Show user message
+                await this.addUserMessage(label);
+                
+                // Proceed
+                this.proceedToStep(this.currentStep + 1);
+            }
+
+            handleCheckboxToggle(value, element) {
+                element.classList.toggle('selected');
+                const index = this.userData.addons.indexOf(value);
+                if (index > -1) {
+                    this.userData.addons.splice(index, 1);
+                } else {
+                    this.userData.addons.push(value);
+                }
+            }
+
+            async handleCheckboxConfirm(stepId) {
+                const options = document.getElementById('currentOptions');
+                if (options) options.remove();
+                
+                const selectedLabels = this.conversationSteps[this.currentStep].options
+                    .filter(opt => this.userData.addons.includes(opt.value))
+                    .map(opt => opt.label);
+                
+                await this.addUserMessage(selectedLabels.length > 0 ? selectedLabels.join(', ') : 'No add-ons');
+                this.proceedToStep(this.currentStep + 1);
+            }
+
+            async handleStepInput(stepId) {
+                const input = document.getElementById('stepInput');
+                const value = input.value.trim();
+                
+                if (!value) return;
+                
+                // Validate
+                const step = this.conversationSteps[this.currentStep];
+                if (step.validation && !step.validation(value)) {
+                    input.style.borderColor = 'var(--error)';
+                    return;
+                }
+
+                document.getElementById('currentOptions')?.remove();
+                this.userData[stepId] = value;
+                await this.addUserMessage(value);
+                this.proceedToStep(this.currentStep + 1);
+            }
+
+            handleTextInput() {
+                const value = this.elements.input.value.trim();
+                if (!value) return;
+                
+                this.elements.input.value = '';
+                this.addUserMessage(value);
+                
+                // Simple fallback response for free text
+                setTimeout(async () => {
+                    await this.showTyping();
+                    await this.addBotMessage("I understand. Let me help you with that. Could we continue with the quote process? Or would you prefer to speak with one of our caring team members directly?");
+                }, 500);
+            }
+
+            handleQuickAction(action) {
+                switch(action) {
+                    case 'pricing':
+                        this.addUserMessage("I'd like to see pricing information");
+                        setTimeout(async () => {
+                            await this.showTyping();
+                            await this.addBotMessage("I'll help you get a personalized quote. Let me gather a few details about your needs.");
+                            this.currentStep = 0;
+                            this.proceedToStep(1);
+                        }, 500);
+                        break;
+                    case 'services':
+                        this.addUserMessage("Tell me about your services");
+                        setTimeout(async () => {
+                            await this.showTyping();
+                            await this.addBotMessage("We offer compassionate pet cremation services including communal, individual, and private cremation options. Each service is performed with dignity and respect. Would you like me to walk you through getting a personalized quote?");
+                        }, 500);
+                        break;
+                    case 'support':
+                        this.addUserMessage("I need to speak with someone");
+                        setTimeout(async () => {
+                            await this.showTyping();
+                            await this.addBotMessage("I completely understand. You can reach our compassionate support team 24/7 at (555) 123-4567, or I can have someone call you. Would you like me to arrange a callback?");
+                        }, 500);
+                        break;
+                }
+            }
+
+            /**
+             * API Integration Point
+             * 
+             * This method simulates a backend API call for pricing calculation.
+             * In production, replace this with an actual fetch() call to your Node.js/Python backend.
+             * 
+             * Example integration:
+             * 
+             * const response = await fetch('/api/calculate-quote', {
+             *     method: 'POST',
+             *     headers: { 'Content-Type': 'application/json' },
+             *     body: JSON.stringify(this.userData)
+             * });
+             * const quote = await response.json();
+             */
+            async mockApiCall() {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        // Mock pricing logic based on industry standards
+                        // Reference: Pet cremation typically ranges $50-$600 depending on size and type
+                        const basePrices = {
+                            communal: { small: 60, medium: 85, large: 125, xlarge: 150 },
+                            individual: { small: 175, medium: 220, large: 280, xlarge: 350 },
+                            private: { small: 250, medium: 320, large: 420, xlarge: 550 }
+                        };
+
+                        const containerPrices = {
+                            basic: 0,
+                            wooden: 45,
+                            ceramic: 85,
+                            biodegradable: 35
+                        };
+
+                        const addonPrices = {
+                            pawprint: 35,
+                            fur: 25,
+                            transport: 65,
+                            witness: 75,
+                            rush: 95
+                        };
+
+                        const weight = this.userData.petWeight || 'medium';
+                        const cremation = this.userData.cremationType || 'individual';
+                        const container = this.userData.container || 'basic';
+
+                        let basePrice = basePrices[cremation][weight];
+                        let containerPrice = containerPrices[container];
+                        let addonsTotal = this.userData.addons.reduce((sum, addon) => 
+                            sum + (addonPrices[addon] || 0), 0);
+
+                        // Distance fee simulation
+                        let distanceFee = 0;
+                        if (this.userData.postcode) {
+                            // Simple mock: odd postcodes = rural (higher fee)
+                            const postcodeNum = parseInt(this.userData.postcode.replace(/\D/g, '')) || 0;
+                            distanceFee = postcodeNum % 2 === 1 ? 25 : 0;
+                        }
+
+                        // Time of day adjustment
+                        let timeAdjustment = 0;
+                        if (this.userData.timeOfDay === 'evening') timeAdjustment = 35;
+                        if (this.userData.timeOfDay === 'rush') timeAdjustment = 50;
+
+                        const subtotal = basePrice + containerPrice + addonsTotal;
+                        const fees = distanceFee + timeAdjustment;
+                        const total = subtotal + fees;
+
+                        resolve({
+                            breakdown: [
+                                { label: 'Cremation Service', value: `$${basePrice}` },
+                                { label: 'Container/Urn', value: `$${containerPrice}` },
+                                { label: 'Selected Add-ons', value: `$${addonsTotal}` },
+                                { label: 'Service Fees', value: `$${fees}` }
+                            ],
+                            total: total,
+                            notes: 'All services include dignified handling and care. Prices may vary slightly based on specific circumstances.'
+                        });
+                    }, 2000); // Simulate network delay
+                });
+            }
+
+            async generateQuote() {
+                // Show loading state
+                this.elements.loadingOverlay.classList.add('active');
+                
+                try {
+                    // API Integration Point - Replace with actual fetch()
+                    const quote = await this.mockApiCall();
+                    
+                    await this.delay(500);
+                    this.elements.loadingOverlay.classList.remove('active');
+                    
+                    await this.showTyping();
+                    await this.addBotMessage("Thank you for providing those details. I've prepared a personalized quote for you:");
+                    
+                    // Render quote card
+                    const quoteHTML = `
+                        <div class="quote-container">
+                            <div class="quote-header">
+                                <div class="quote-icon">📋</div>
+                                <div>
+                                    <div class="quote-title">Your Personalized Quote</div>
+                                    <div class="quote-subtitle">Estimated Total</div>
+                                </div>
+                            </div>
+                            <div class="quote-breakdown">
+                                ${quote.breakdown.map(item => `
+                                    <div class="quote-item">
+                                        <span>${item.label}</span>
+                                        <span>${item.value}</span>
+                                    </div>
+                                `).join('')}
+                                <div class="quote-item total">
+                                    <span>Total Estimate</span>
+                                    <span>$${quote.total}</span>
+                                </div>
+                            </div>
+                            <div class="quote-note">${quote.notes}</div>
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <p>Would you like to proceed with booking, or do you have any questions about this quote? I'm here to help in any way I can.</p>
+                            <button class="restart-btn" onclick="chatApp.restart()">Start New Quote</button>
+                        </div>
+                    `;
+                    
+                    await this.addBotMessage(quoteHTML, true);
+                    
+                } catch (error) {
+                    this.elements.loadingOverlay.classList.remove('active');
+                    await this.addBotMessage("I apologize, but I encountered an error calculating your quote. Please try again or call us directly at (555) 123-4567 for immediate assistance.");
+                }
+            }
+
+            async addBotMessage(content, isHTML = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message message-bot';
+                
+                const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                messageDiv.innerHTML = `
+                    <div class="avatar">🕊️</div>
+                    <div class="message-content">
+                        <div class="message-bubble">${isHTML ? content : this.escapeHtml(content)}</div>
+                        <div class="message-time">${time}</div>
+                    </div>
+                `;
+                
+                this.elements.messages.appendChild(messageDiv);
+                this.scrollToBottom();
+                this.messageHistory.push({ role: 'bot', content });
+                
+                // Announce for screen readers
+                this.announceToScreenReader(content);
+            }
+
+            async addUserMessage(content) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message message-user';
+                
+                const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                messageDiv.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-bubble">${this.escapeHtml(content)}</div>
+                        <div class="message-time">${time}</div>
+                    </div>
+                `;
+                
+                this.elements.messages.appendChild(messageDiv);
+                this.scrollToBottom();
+                this.messageHistory.push({ role: 'user', content });
+            }
+
+            async showTyping() {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'message message-bot';
+                typingDiv.id = 'typingIndicator';
+                typingDiv.innerHTML = `
+                    <div class="avatar">🕊️</div>
+                    <div class="typing-indicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                `;
+                this.elements.messages.appendChild(typingDiv);
+                this.scrollToBottom();
+                
+                await this.delay(1500);
+                typingDiv.remove();
+            }
+
+            scrollToBottom() {
+                this.elements.messages.scrollTop = this.elements.messages.scrollHeight;
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            announceToScreenReader(message) {
+                // Remove HTML tags for screen reader
+                const cleanMessage = message.replace(/<[^>]*>/g, '');
+                const announcement = document.createElement('div');
+                announcement.className = 'sr-only';
+                announcement.setAttribute('role', 'status');
+                announcement.setAttribute('aria-live', 'polite');
+                announcement.textContent = cleanMessage;
+                document.body.appendChild(announcement);
+                setTimeout(() => announcement.remove(), 1000);
+            }
+
+            restart() {
+                this.currentStep = 0;
+                this.userData = {
+                    petWeight: null,
+                    postcode: null,
+                    timeOfDay: null,
+                    cremationType: null,
+                    containerType: null,
+                    addons: []
+                };
+                this.messageHistory = [];
+                this.elements.messages.innerHTML = '';
+                this.startConversation();
+            }
+        }
+
+        // Initialize chatbot
+        const chatApp = new PetMemorialChatbot();
+
+        // Restore theme preference
+        const savedTheme = localStorage.getItem('chatTheme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    </script>
+</body>
+</html>
