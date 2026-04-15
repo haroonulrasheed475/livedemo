@@ -1,0 +1,2489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternal Paws | Compassionate Pet Memorial Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Soft, calming color palette */
+            --primary: #7B9E87;
+            --primary-light: #A8C5A8;
+            --primary-dark: #5A7A65;
+            --secondary: #E8D5C4;
+            --accent: #D4A574;
+            --background: #FAF9F7;
+            --surface: #FFFFFF;
+            --text-primary: #3D4A3D;
+            --text-secondary: #6B7B6B;
+            --text-light: #9AA89A;
+            --border: #E5E8E5;
+            --shadow: rgba(61, 74, 61, 0.08);
+            --shadow-hover: rgba(61, 74, 61, 0.12);
+            
+            /* Status colors */
+            --success: #7B9E87;
+            --error: #C98B8B;
+            --warning: #D4A574;
+            
+            /* Spacing */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+        }
+
+        [data-theme="dark"] {
+            --primary: #8FBC8F;
+            --primary-light: #A8D5A8;
+            --primary-dark: #6B8E6B;
+            --secondary: #4A403A;
+            --accent: #C9A86C;
+            --background: #1A1F1A;
+            --surface: #2A302A;
+            --text-primary: #E8F0E8;
+            --text-secondary: #A8B8A8;
+            --text-light: #6B7B6B;
+            --border: #3A453A;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(250, 249, 247, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-xl);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-hover);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 120px 40px 80px;
+            background: linear-gradient(135deg, var(--background) 0%, var(--secondary) 100%);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            mask-image: linear-gradient(to left, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to left, black 50%, transparent 100%);
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(123, 158, 135, 0.1);
+            border: 1px solid var(--primary-light);
+            border-radius: var(--radius-xl);
+            font-size: 0.85rem;
+            color: var(--primary-dark);
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            padding: 16px 32px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-xl);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(123, 158, 135, 0.3);
+        }
+
+        .btn-secondary {
+            padding: 16px 32px;
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-xl);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary-dark);
+            background: rgba(123, 158, 135, 0.05);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-image {
+            position: relative;
+            height: 600px;
+        }
+
+        .hero-image-main {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 60px var(--shadow-hover);
+        }
+
+        .hero-image-card {
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            background: white;
+            padding: 24px;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px var(--shadow-hover);
+            max-width: 280px;
+        }
+
+        .hero-image-card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .hero-image-card-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 120px 40px;
+            background: var(--surface);
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .section-label {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(123, 158, 135, 0.1);
+            border-radius: var(--radius-xl);
+            font-size: 0.85rem;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--background);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: gap 0.2s ease;
+        }
+
+        .service-link:hover {
+            gap: 12px;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, var(--background) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1518495973542-7d76c2bbd006?w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .process-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px var(--shadow-hover);
+        }
+
+        .process-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 0 auto 24px;
+        }
+
+        .process-title {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .process-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 120px 40px;
+            background: var(--surface);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--background);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            color: var(--primary-light);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .testimonial-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-light);
+        }
+
+        .testimonial-info h4 {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .testimonial-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 40px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            padding: 18px 40px;
+            background: white;
+            color: var(--primary-dark);
+            border: none;
+            border-radius: var(--radius-xl);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 80px 40px 40px;
+            background: var(--text-primary);
+            color: white;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            margin-bottom: 24px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 60px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+
+        /* Chat Widget Styles - UNCHANGED from original */
+        .chat-widget-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--shadow), 0 2px 8px var(--shadow-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .chat-widget-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 30px var(--shadow-hover);
+        }
+
+        .chat-widget-button:active {
+            transform: scale(0.95);
+        }
+
+        .chat-widget-button svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+            transition: transform 0.3s ease;
+        }
+
+        .chat-widget-button.active svg {
+            transform: rotate(90deg);
+        }
+
+        .chat-widget-button .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--surface);
+            display: none;
+        }
+
+        .chat-container {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 400px;
+            max-width: calc(100vw - 40px);
+            height: 600px;
+            max-height: calc(100vh - 140px);
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 60px var(--shadow-hover);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .chat-container.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+
+        .chat-header-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-avatar {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .chat-title {
+            flex: 1;
+        }
+
+        .chat-title h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .chat-title p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .header-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .header-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            position: absolute;
+            bottom: 8px;
+            right: 20px;
+            font-size: 0.7rem;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: var(--background);
+            scroll-behavior: smooth;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: messageAppear 0.4s ease forwards;
+        }
+
+        @keyframes messageAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-bot {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .message-bot .avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .message-content {
+            max-width: 85%;
+        }
+
+        .message-bubble {
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .message-bot .message-bubble {
+            background: var(--surface);
+            color: var(--text-primary);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-user {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .message-user .message-bubble {
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 4px;
+            padding: 0 4px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 6px;
+            padding: 18px;
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            border-bottom-left-radius: 4px;
+            width: fit-content;
+            box-shadow: 0 2px 8px var(--shadow);
+            margin-bottom: 16px;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .input-options {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .option-btn {
+            padding: 10px 18px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .option-btn.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .selection-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .selection-card {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .selection-card:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .selection-card.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .selection-card .card-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .card-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .text-input-container {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .text-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-xl);
+            font-size: 0.95rem;
+            background: var(--surface);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .text-input:focus {
+            border-color: var(--primary);
+        }
+
+        .send-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .send-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .send-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .chat-input-area {
+            padding: 16px 20px;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .quick-action-btn {
+            padding: 8px 14px;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .quick-action-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            border-color: var(--primary-light);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-xl);
+            font-size: 0.95rem;
+            background: var(--background);
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+            background: var(--surface);
+        }
+
+        .input-action-btn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .input-action-btn:hover {
+            background: var(--background);
+        }
+
+        .input-action-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-secondary);
+        }
+
+        .quote-container {
+            background: linear-gradient(135deg, var(--secondary), var(--background));
+            border: 2px solid var(--primary-light);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-top: 12px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quote-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quote-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .quote-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .quote-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .quote-breakdown {
+            margin-bottom: 16px;
+        }
+
+        .quote-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .quote-item.total {
+            border-top: 2px solid var(--border);
+            margin-top: 8px;
+            padding-top: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .quote-note {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-style: italic;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(250, 249, 247, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 16px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .addon-list {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .addon-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .addon-item:hover {
+            border-color: var(--primary-light);
+        }
+
+        .addon-item.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .addon-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .addon-item.selected .addon-checkbox {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .addon-checkbox::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .addon-item.selected .addon-checkbox::after {
+            opacity: 1;
+        }
+
+        .addon-info {
+            flex: 1;
+        }
+
+        .addon-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .addon-price {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .restart-btn {
+            margin-top: 16px;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .restart-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-image {
+                height: 400px;
+                order: -1;
+            }
+
+            .hero-image-card {
+                left: 20px;
+                bottom: -20px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .services-grid,
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .chat-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                max-width: 100%;
+                height: 100%;
+                max-height: 100%;
+                border-radius: 0;
+                bottom: 0;
+                right: 0;
+            }
+
+            .chat-widget-button {
+                bottom: 20px;
+                right: 20px;
+                width: 56px;
+                height: 56px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🕊️</div>
+                <span class="logo-text">Eternal Paws</span>
+            </a>
+            <div class="nav-links">
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#process" class="nav-link">How It Works</a>
+                <a href="#testimonials" class="nav-link">Stories</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <button class="nav-cta" onclick="chatApp.toggleChat()">Get a Quote</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>🌿</span>
+                    <span>Compassionate Care Since 2008</span>
+                </div>
+                <h1 class="hero-title">
+                    Honoring the bond between you and your <span>beloved companion</span>
+                </h1>
+                <p class="hero-subtitle">
+                    We provide dignified, compassionate end-of-life services for pets. From gentle cremation to memorial keepsakes, we're here to support you through this difficult journey with care and understanding.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="chatApp.toggleChat()">
+                        <span>Get Instant Quote</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+                        Our Services
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">15K+</span>
+                        <span class="stat-label">Families Served</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Support Available</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.9</span>
+                        <span class="stat-label">Average Rating</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&auto=format&fit=crop" alt="Peaceful memorial garden with flowers" class="hero-image-main">
+                <div class="hero-image-card">
+                    <div class="hero-image-card-icon">💚</div>
+                    <p class="hero-image-card-text">"They handled everything with such gentleness and respect. It made saying goodbye a little easier." — Sarah M.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Our Services</span>
+                <h2 class="section-title">Comprehensive Memorial Options</h2>
+                <p class="section-subtitle">Every pet deserves a dignified farewell. We offer a range of services to honor your companion's memory in a way that feels right for your family.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=600&auto=format&fit=crop" alt="Private cremation service" class="service-image">
+                    <div class="service-content">
+                        <div class="service-icon">🕊️</div>
+                        <h3 class="service-title">Private Cremation</h3>
+                        <p class="service-desc">Your pet is cremated individually with the utmost care and respect. You receive only your pet's ashes in your chosen urn.</p>
+                        <a href="#" class="service-link" onclick="chatApp.toggleChat(); return false;">
+                            Get Quote <span>→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop" alt="Communal cremation memorial garden" class="service-image">
+                    <div class="service-content">
+                        <div class="service-icon">🌸</div>
+                        <h3 class="service-title">Communal Cremation</h3>
+                        <p class="service-desc">A respectful group cremation where ashes are scattered in our beautiful memorial garden. Most affordable option.</p>
+                        <a href="#" class="service-link" onclick="chatApp.toggleChat(); return false;">
+                            Get Quote <span>→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1518495973542-7d76c2bbd006?w=600&auto=format&fit=crop" alt="Memorial keepsakes and urns" class="service-image">
+                    <div class="service-content">
+                        <div class="service-icon">🏺</div>
+                        <h3 class="service-title">Memorial Keepsakes</h3>
+                        <p class="service-desc">From handcrafted urns to paw print impressions and fur clippings, create lasting memories of your beloved pet.</p>
+                        <a href="#" class="service-link" onclick="chatApp.toggleChat(); return false;">
+                            Get Quote <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="process-bg"></div>
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">How It Works</span>
+                <h2 class="section-title">A Gentle Process</h2>
+                <p class="section-subtitle">We've designed our services to be as simple and stress-free as possible during this emotional time.</p>
+            </div>
+            <div class="process-grid">
+                <div class="process-card">
+                    <div class="process-number">1</div>
+                    <h3 class="process-title">Contact Us</h3>
+                    <p class="process-desc">Call us anytime, day or night. We'll guide you through the options and arrange pickup or drop-off.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">2</div>
+                    <h3 class="process-title">Choose Services</h3>
+                    <p class="process-desc">Select the cremation type, urn, and any memorial keepsakes that feel right for your family.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">3</div>
+                    <h3 class="process-title">Gentle Care</h3>
+                    <p class="process-desc">Your pet is treated with dignity throughout. Optional witnessed cremation available.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">4</div>
+                    <h3 class="process-title">Return Home</h3>
+                    <p class="process-desc">Ashes are returned in 3-5 days in your chosen urn, or scattered in our memorial garden.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Testimonials</span>
+                <h2 class="section-title">Families We've Helped</h2>
+                <p class="section-subtitle">Hear from pet parents who found comfort in our services during their time of loss.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">When we lost our Golden Retriever of 14 years, we were devastated. The team at Eternal Paws treated Max with such respect and kindness. They walked us through every step and the wooden urn we chose is beautiful.</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&auto=format&fit=crop" alt="Jennifer portrait" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Jennifer R.</h4>
+                            <p>Golden Retriever Mom</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The 24/7 availability meant everything when we had to make that difficult decision at 2 AM. They came to our home, handled everything with grace, and even sent us a clay paw print that sits on our mantle.</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop" alt="Michael portrait" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Michael T.</h4>
+                            <p>Cat Dad to Whiskers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">We chose the communal cremation with garden scattering. Visiting the memorial garden has become part of our healing process. It's peaceful, beautiful, and knowing our Luna is there brings us comfort.</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop" alt="Amanda portrait" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Amanda & David K.</h4>
+                            <p>Labrador Parents</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The AI chatbot made getting a quote so easy when I couldn't bear to talk to anyone on the phone. It was gentle, respectful, and gave me all the information I needed to make decisions for my elderly cat.</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop" alt="Robert portrait" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Robert S.</h4>
+                            <p>Tabby Cat Dad</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="cta-bg"></div>
+        <div class="cta-container">
+            <h2 class="cta-title">We're Here for You</h2>
+            <p class="cta-subtitle">Whether you need immediate assistance or are planning ahead, our compassionate team is available 24/7 to answer your questions and guide you through this difficult time.</p>
+            <button class="cta-button" onclick="chatApp.toggleChat()">
+                <span>💬</span>
+                <span>Chat with Our AI Assistant</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>Eternal Paws</h3>
+                <p>Providing compassionate end-of-life care for pets and their families since 2008. We believe every pet deserves a dignified farewell and every family deserves support during their time of loss.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📸</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">💼</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Private Cremation</a></li>
+                    <li><a href="#">Communal Cremation</a></li>
+                    <li><a href="#">Memorial Urns</a></li>
+                    <li><a href="#">Keepsakes</a></li>
+                    <li><a href="#">Home Pickup</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Memorial Garden</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Grief Resources</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">(555) 123-4567</a></li>
+                    <li><a href="#">support@eternalpaws.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Eternal Paws Pet Memorial Services. All rights reserved.</p>
+            <p>Licensed & Insured | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <!-- Chat Widget Button -->
+    <button class="chat-widget-button" id="chatToggle" aria-label="Open chat">
+        <span class="notification-badge"></span>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+            <path d="M7 9h10v2H7zm0-3h10v2H7z"/>
+        </svg>
+    </button>
+
+    <!-- Chat Container -->
+    <div class="chat-container" id="chatContainer" role="dialog" aria-label="Chat window">
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Calculating your quote...</p>
+        </div>
+
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div class="chat-header-content">
+                <div class="chat-avatar">🕊️</div>
+                <div class="chat-title">
+                    <h3>Sarah</h3>
+                    <p>Memorial Services Guide</p>
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn" id="themeToggle" aria-label="Toggle dark mode">
+                        <svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    </button>
+                    <button class="header-btn" id="closeChat" aria-label="Close chat">
+                        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-text" id="progressText">Step 1 of 6</span>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be dynamically inserted here -->
+        </div>
+
+        <!-- Chat Input Area -->
+        <div class="chat-input-area">
+            <div class="quick-actions" id="quickActions">
+                <button class="quick-action-btn" onclick="chatApp.handleQuickAction('pricing')">View Pricing</button>
+                <button class="quick-action-btn" onclick="chatApp.handleQuickAction('services')">Our Services</button>
+                <button class="quick-action-btn" onclick="chatApp.handleQuickAction('support')">Speak to someone</button>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." aria-label="Message input">
+                <button class="input-action-btn" id="sendBtn" aria-label="Send message">
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Pet Memorial Chatbot Application
+         * UNCHANGED from original implementation
+         */
+        class PetMemorialChatbot {
+            constructor() {
+                this.currentStep = 0;
+                this.userData = {
+                    petWeight: null,
+                    postcode: null,
+                    timeOfDay: null,
+                    cremationType: null,
+                    containerType: null,
+                    addons: []
+                };
+                this.isOpen = false;
+                this.messageHistory = [];
+                
+                this.conversationSteps = [
+                    {
+                        id: 'welcome',
+                        type: 'message',
+                        content: "I'm so sorry you're going through this. I'm here to help you navigate this difficult time with compassion and care. I'll gently guide you through a few steps to help you understand your options and provide you with a personalized quote.",
+                        delay: 1000
+                    },
+                    {
+                        id: 'petWeight',
+                        type: 'selection',
+                        question: "To give you an accurate quote, could you tell me approximately how much your beloved pet weighs?",
+                        options: [
+                            { value: 'small', label: 'Small', desc: 'Under 15 lbs', icon: '🐕' },
+                            { value: 'medium', label: 'Medium', desc: '15-50 lbs', icon: '🐕' },
+                            { value: 'large', label: 'Large', desc: '51-100 lbs', icon: '🐕' },
+                            { value: 'xlarge', label: 'Extra Large', desc: 'Over 100 lbs', icon: '🐕' }
+                        ]
+                    },
+                    {
+                        id: 'postcode',
+                        type: 'input',
+                        question: "Thank you. What's your postcode? This helps us calculate any travel fees and confirm service availability in your area.",
+                        placeholder: "Enter your postcode...",
+                        validation: (val) => val.length >= 3
+                    },
+                    {
+                        id: 'timeOfDay',
+                        type: 'selection',
+                        question: "When would you prefer our team to visit? We understand timing is important during this sensitive time.",
+                        options: [
+                            { value: 'morning', label: 'Morning', desc: '8:00 AM - 12:00 PM', icon: '🌅' },
+                            { value: 'afternoon', label: 'Afternoon', desc: '12:00 PM - 5:00 PM', icon: '☀️' },
+                            { value: 'evening', label: 'Evening', desc: '5:00 PM - 8:00 PM', icon: '🌙' },
+                            { value: 'anytime', label: 'Anytime', desc: 'Most flexible', icon: '✓' }
+                        ]
+                    },
+                    {
+                        id: 'cremationType',
+                        type: 'cards',
+                        question: "Which type of cremation service feels right for you and your family?",
+                        options: [
+                            { 
+                                value: 'communal', 
+                                label: 'Communal', 
+                                desc: 'Multiple pets together, ashes scattered in memorial garden', 
+                                priceNote: 'Most affordable',
+                                icon: '🌸'
+                            },
+                            { 
+                                value: 'individual', 
+                                label: 'Individual', 
+                                desc: 'Partitioned cremation, ashes returned to you', 
+                                priceNote: 'Mid-range',
+                                icon: '🕊️'
+                            },
+                            { 
+                                value: 'private', 
+                                label: 'Private', 
+                                desc: 'Solo cremation, guaranteed 100% your pet only', 
+                                priceNote: 'Premium',
+                                icon: '💙'
+                            }
+                        ]
+                    },
+                    {
+                        id: 'container',
+                        type: 'cards',
+                        question: "How would you like to receive your pet's ashes? (If applicable)",
+                        options: [
+                            { value: 'basic', label: 'Basic Container', desc: 'Simple, dignified container included', icon: '📦' },
+                            { value: 'wooden', label: 'Wooden Urn', desc: 'Handcrafted cedar with lock & key', icon: '🌳' },
+                            { value: 'ceramic', label: 'Ceramic Urn', desc: 'Elegant, customizable design', icon: '🏺' },
+                            { value: 'biodegradable', label: 'Biodegradable', desc: 'Eco-friendly, for garden burial', icon: '🌱' }
+                        ]
+                    },
+                    {
+                        id: 'addons',
+                        type: 'checkbox',
+                        question: "Would you like to add any of these memorial options?",
+                        options: [
+                            { value: 'pawprint', label: 'Clay Paw Print', price: '$35', desc: 'Lasting impression of their paw' },
+                            { value: 'fur', label: 'Fur Clipping Keepsake', price: '$25', desc: 'Preserved in memorial case' },
+                            { value: 'transport', label: 'Home Transportation', price: '$65', desc: 'We come to your home' },
+                            { value: 'witness', label: 'Witnessed Cremation', price: '$75', desc: 'Be present at the start' },
+                            { value: 'rush', label: 'Same-Day Service', price: '$95', desc: 'Priority processing' }
+                        ]
+                    }
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.cacheDOM();
+                this.bindEvents();
+                this.updateProgress();
+            }
+
+            cacheDOM() {
+                this.elements = {
+                    toggle: document.getElementById('chatToggle'),
+                    container: document.getElementById('chatContainer'),
+                    messages: document.getElementById('chatMessages'),
+                    input: document.getElementById('chatInput'),
+                    sendBtn: document.getElementById('sendBtn'),
+                    closeBtn: document.getElementById('closeChat'),
+                    themeToggle: document.getElementById('themeToggle'),
+                    progressFill: document.getElementById('progressFill'),
+                    progressText: document.getElementById('progressText'),
+                    loadingOverlay: document.getElementById('loadingOverlay'),
+                    quickActions: document.getElementById('quickActions')
+                };
+            }
+
+            bindEvents() {
+                this.elements.toggle.addEventListener('click', () => this.toggleChat());
+                this.elements.closeBtn.addEventListener('click', () => this.toggleChat());
+                
+                this.elements.sendBtn.addEventListener('click', () => this.handleTextInput());
+                this.elements.input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.handleTextInput();
+                });
+
+                this.elements.themeToggle.addEventListener('click', () => this.toggleTheme());
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) this.toggleChat();
+                });
+            }
+
+            toggleChat() {
+                this.isOpen = !this.isOpen;
+                this.elements.container.classList.toggle('active', this.isOpen);
+                this.elements.toggle.classList.toggle('active', this.isOpen);
+                
+                if (this.isOpen && this.messageHistory.length === 0) {
+                    this.startConversation();
+                }
+            }
+
+            toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('chatTheme', newTheme);
+            }
+
+            updateProgress() {
+                const totalSteps = this.conversationSteps.length - 1;
+                const currentStepNum = Math.max(0, this.currentStep - 1);
+                const progress = (currentStepNum / totalSteps) * 100;
+                
+                this.elements.progressFill.style.width = `${progress}%`;
+                this.elements.progressText.textContent = 
+                    this.currentStep === 0 ? 'Getting started' : `Step ${currentStepNum} of ${totalSteps}`;
+            }
+
+            async startConversation() {
+                await this.showTyping();
+                await this.addBotMessage(this.conversationSteps[0].content);
+                await this.delay(500);
+                this.proceedToStep(1);
+            }
+
+            async proceedToStep(stepIndex) {
+                this.currentStep = stepIndex;
+                this.updateProgress();
+                
+                if (stepIndex >= this.conversationSteps.length) {
+                    await this.generateQuote();
+                    return;
+                }
+
+                const step = this.conversationSteps[stepIndex];
+                await this.showTyping();
+                await this.addBotMessage(step.question);
+                
+                this.renderInputOptions(step);
+            }
+
+            renderInputOptions(step) {
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'input-options';
+                optionsContainer.id = 'currentOptions';
+
+                switch(step.type) {
+                    case 'selection':
+                        step.options.forEach(opt => {
+                            const btn = document.createElement('button');
+                            btn.className = 'option-btn';
+                            btn.innerHTML = `${opt.icon} ${opt.label}`;
+                            btn.onclick = () => this.handleSelection(step.id, opt.value, opt.label);
+                            optionsContainer.appendChild(btn);
+                        });
+                        break;
+
+                    case 'cards':
+                        optionsContainer.className = 'selection-cards';
+                        step.options.forEach(opt => {
+                            const card = document.createElement('div');
+                            card.className = 'selection-card';
+                            card.innerHTML = `
+                                <div class="card-icon">${opt.icon}</div>
+                                <div class="card-title">${opt.label}</div>
+                                <div class="card-desc">${opt.desc}</div>
+                                ${opt.priceNote ? `<div class="card-desc" style="margin-top:4px;color:var(--primary);font-weight:500;">${opt.priceNote}</div>` : ''}
+                            `;
+                            card.onclick = () => this.handleSelection(step.id, opt.value, opt.label, card);
+                            optionsContainer.appendChild(card);
+                        });
+                        break;
+
+                    case 'input':
+                        const inputWrapper = document.createElement('div');
+                        inputWrapper.className = 'text-input-container';
+                        inputWrapper.innerHTML = `
+                            <input type="text" class="text-input" placeholder="${step.placeholder}" id="stepInput">
+                            <button class="send-btn" onclick="chatApp.handleStepInput('${step.id}')">
+                                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                            </button>
+                        `;
+                        optionsContainer.appendChild(inputWrapper);
+                        setTimeout(() => document.getElementById('stepInput')?.focus(), 100);
+                        break;
+
+                    case 'checkbox':
+                        optionsContainer.className = 'addon-list';
+                        step.options.forEach(opt => {
+                            const item = document.createElement('div');
+                            item.className = 'addon-item';
+                            item.innerHTML = `
+                                <div class="addon-checkbox"></div>
+                                <div class="addon-info">
+                                    <div class="addon-name">${opt.label}</div>
+                                    <div class="addon-price">${opt.price} — ${opt.desc}</div>
+                                </div>
+                            `;
+                            item.onclick = () => this.handleCheckboxToggle(opt.value, item);
+                            optionsContainer.appendChild(item);
+                        });
+                        
+                        const continueBtn = document.createElement('button');
+                        continueBtn.className = 'option-btn';
+                        continueBtn.style.marginTop = '12px';
+                        continueBtn.style.width = '100%';
+                        continueBtn.textContent = 'Continue';
+                        continueBtn.onclick = () => this.handleCheckboxConfirm(step.id);
+                        optionsContainer.appendChild(continueBtn);
+                        break;
+                }
+
+                this.elements.messages.appendChild(optionsContainer);
+                this.scrollToBottom();
+            }
+
+            async handleSelection(stepId, value, label, element) {
+                const options = document.getElementById('currentOptions');
+                if (options) {
+                    if (element) {
+                        element.classList.add('selected');
+                        await this.delay(200);
+                    }
+                    options.remove();
+                }
+
+                this.userData[stepId] = value;
+                await this.addUserMessage(label);
+                this.proceedToStep(this.currentStep + 1);
+            }
+
+            handleCheckboxToggle(value, element) {
+                element.classList.toggle('selected');
+                const index = this.userData.addons.indexOf(value);
+                if (index > -1) {
+                    this.userData.addons.splice(index, 1);
+                } else {
+                    this.userData.addons.push(value);
+                }
+            }
+
+            async handleCheckboxConfirm(stepId) {
+                const options = document.getElementById('currentOptions');
+                if (options) options.remove();
+                
+                const selectedLabels = this.conversationSteps[this.currentStep].options
+                    .filter(opt => this.userData.addons.includes(opt.value))
+                    .map(opt => opt.label);
+                
+                await this.addUserMessage(selectedLabels.length > 0 ? selectedLabels.join(', ') : 'No add-ons');
+                this.proceedToStep(this.currentStep + 1);
+            }
+
+            async handleStepInput(stepId) {
+                const input = document.getElementById('stepInput');
+                const value = input.value.trim();
+                
+                if (!value) return;
+                
+                const step = this.conversationSteps[this.currentStep];
+                if (step.validation && !step.validation(value)) {
+                    input.style.borderColor = 'var(--error)';
+                    return;
+                }
+
+                document.getElementById('currentOptions')?.remove();
+                this.userData[stepId] = value;
+                await this.addUserMessage(value);
+                this.proceedToStep(this.currentStep + 1);
+            }
+
+            handleTextInput() {
+                const value = this.elements.input.value.trim();
+                if (!value) return;
+                
+                this.elements.input.value = '';
+                this.addUserMessage(value);
+                
+                setTimeout(async () => {
+                    await this.showTyping();
+                    await this.addBotMessage("I understand. Let me help you with that. Could we continue with the quote process? Or would you prefer to speak with one of our caring team members directly?");
+                }, 500);
+            }
+
+            handleQuickAction(action) {
+                switch(action) {
+                    case 'pricing':
+                        this.addUserMessage("I'd like to see pricing information");
+                        setTimeout(async () => {
+                            await this.showTyping();
+                            await this.addBotMessage("I'll help you get a personalized quote. Let me gather a few details about your needs.");
+                            this.currentStep = 0;
+                            this.proceedToStep(1);
+                        }, 500);
+                        break;
+                    case 'services':
+                        this.addUserMessage("Tell me about your services");
+                        setTimeout(async () => {
+                            await this.showTyping();
+                            await this.addBotMessage("We offer compassionate pet cremation services including communal, individual, and private cremation options. Each service is performed with dignity and respect. Would you like me to walk you through getting a personalized quote?");
+                        }, 500);
+                        break;
+                    case 'support':
+                        this.addUserMessage("I need to speak with someone");
+                        setTimeout(async () => {
+                            await this.showTyping();
+                            await this.addBotMessage("I completely understand. You can reach our compassionate support team 24/7 at (555) 123-4567, or I can have someone call you. Would you like me to arrange a callback?");
+                        }, 500);
+                        break;
+                }
+            }
+
+            async mockApiCall() {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        const basePrices = {
+                            communal: { small: 60, medium: 85, large: 125, xlarge: 150 },
+                            individual: { small: 175, medium: 220, large: 280, xlarge: 350 },
+                            private: { small: 250, medium: 320, large: 420, xlarge: 550 }
+                        };
+
+                        const containerPrices = {
+                            basic: 0,
+                            wooden: 45,
+                            ceramic: 85,
+                            biodegradable: 35
+                        };
+
+                        const addonPrices = {
+                            pawprint: 35,
+                            fur: 25,
+                            transport: 65,
+                            witness: 75,
+                            rush: 95
+                        };
+
+                        const weight = this.userData.petWeight || 'medium';
+                        const cremation = this.userData.cremationType || 'individual';
+                        const container = this.userData.container || 'basic';
+
+                        let basePrice = basePrices[cremation][weight];
+                        let containerPrice = containerPrices[container];
+                        let addonsTotal = this.userData.addons.reduce((sum, addon) => 
+                            sum + (addonPrices[addon] || 0), 0);
+
+                        let distanceFee = 0;
+                        if (this.userData.postcode) {
+                            const postcodeNum = parseInt(this.userData.postcode.replace(/\D/g, '')) || 0;
+                            distanceFee = postcodeNum % 2 === 1 ? 25 : 0;
+                        }
+
+                        let timeAdjustment = 0;
+                        if (this.userData.timeOfDay === 'evening') timeAdjustment = 35;
+                        if (this.userData.timeOfDay === 'rush') timeAdjustment = 50;
+
+                        const subtotal = basePrice + containerPrice + addonsTotal;
+                        const fees = distanceFee + timeAdjustment;
+                        const total = subtotal + fees;
+
+                        resolve({
+                            breakdown: [
+                                { label: 'Cremation Service', value: `$${basePrice}` },
+                                { label: 'Container/Urn', value: `$${containerPrice}` },
+                                { label: 'Selected Add-ons', value: `$${addonsTotal}` },
+                                { label: 'Service Fees', value: `$${fees}` }
+                            ],
+                            total: total,
+                            notes: 'All services include dignified handling and care. Prices may vary slightly based on specific circumstances.'
+                        });
+                    }, 2000);
+                });
+            }
+
+            async generateQuote() {
+                this.elements.loadingOverlay.classList.add('active');
+                
+                try {
+                    const quote = await this.mockApiCall();
+                    
+                    await this.delay(500);
+                    this.elements.loadingOverlay.classList.remove('active');
+                    
+                    await this.showTyping();
+                    await this.addBotMessage("Thank you for providing those details. I've prepared a personalized quote for you:");
+                    
+                    const quoteHTML = `
+                        <div class="quote-container">
+                            <div class="quote-header">
+                                <div class="quote-icon">📋</div>
+                                <div>
+                                    <div class="quote-title">Your Personalized Quote</div>
+                                    <div class="quote-subtitle">Estimated Total</div>
+                                </div>
+                            </div>
+                            <div class="quote-breakdown">
+                                ${quote.breakdown.map(item => `
+                                    <div class="quote-item">
+                                        <span>${item.label}</span>
+                                        <span>${item.value}</span>
+                                    </div>
+                                `).join('')}
+                                <div class="quote-item total">
+                                    <span>Total Estimate</span>
+                                    <span>$${quote.total}</span>
+                                </div>
+                            </div>
+                            <div class="quote-note">${quote.notes}</div>
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <p>Would you like to proceed with booking, or do you have any questions about this quote? I'm here to help in any way I can.</p>
+                            <button class="restart-btn" onclick="chatApp.restart()">Start New Quote</button>
+                        </div>
+                    `;
+                    
+                    await this.addBotMessage(quoteHTML, true);
+                    
+                } catch (error) {
+                    this.elements.loadingOverlay.classList.remove('active');
+                    await this.addBotMessage("I apologize, but I encountered an error calculating your quote. Please try again or call us directly at (555) 123-4567 for immediate assistance.");
+                }
+            }
+
+            async addBotMessage(content, isHTML = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message message-bot';
+                
+                const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                messageDiv.innerHTML = `
+                    <div class="avatar">🕊️</div>
+                    <div class="message-content">
+                        <div class="message-bubble">${isHTML ? content : this.escapeHtml(content)}</div>
+                        <div class="message-time">${time}</div>
+                    </div>
+                `;
+                
+                this.elements.messages.appendChild(messageDiv);
+                this.scrollToBottom();
+                this.messageHistory.push({ role: 'bot', content });
+                
+                this.announceToScreenReader(content);
+            }
+
+            async addUserMessage(content) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message message-user';
+                
+                const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                messageDiv.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-bubble">${this.escapeHtml(content)}</div>
+                        <div class="message-time">${time}</div>
+                    </div>
+                `;
+                
+                this.elements.messages.appendChild(messageDiv);
+                this.scrollToBottom();
+                this.messageHistory.push({ role: 'user', content });
+            }
+
+            async showTyping() {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'message message-bot';
+                typingDiv.id = 'typingIndicator';
+                typingDiv.innerHTML = `
+                    <div class="avatar">🕊️</div>
+                    <div class="typing-indicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                `;
+                this.elements.messages.appendChild(typingDiv);
+                this.scrollToBottom();
+                
+                await this.delay(1500);
+                typingDiv.remove();
+            }
+
+            scrollToBottom() {
+                this.elements.messages.scrollTop = this.elements.messages.scrollHeight;
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            announceToScreenReader(message) {
+                const cleanMessage = message.replace(/<[^>]*>/g, '');
+                const announcement = document.createElement('div');
+                announcement.className = 'sr-only';
+                announcement.setAttribute('role', 'status');
+                announcement.setAttribute('aria-live', 'polite');
+                announcement.textContent = cleanMessage;
+                document.body.appendChild(announcement);
+                setTimeout(() => announcement.remove(), 1000);
+            }
+
+            restart() {
+                this.currentStep = 0;
+                this.userData = {
+                    petWeight: null,
+                    postcode: null,
+                    timeOfDay: null,
+                    cremationType: null,
+                    containerType: null,
+                    addons: []
+                };
+                this.messageHistory = [];
+                this.elements.messages.innerHTML = '';
+                this.startConversation();
+            }
+        }
+
+        // Initialize chatbot
+        const chatApp = new PetMemorialChatbot();
+
+        // Restore theme preference
+        const savedTheme = localStorage.getItem('chatTheme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everlasting Tails | Pet Memorial Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --midnight-blue: #1a2a3a;
+            --soft-lavender: #9b8aa5;
+            --warm-copper: #b87333;
+            --pale-gold: #e8dcc4;
+            --misty-rose: #f5e6e0;
+            --soft-white: #faf9f7;
+            --charcoal: #2d3436;
+            --sage-muted: #8b9d83;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--soft-white);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 42, 58, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--pale-gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--misty-rose);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--warm-copper);
+        }
+
+        /* Hero Section - Diagonal Split */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--midnight-blue);
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, #243442 100%);
+        }
+
+        .hero-visual {
+            background: linear-gradient(45deg, var(--misty-rose) 0%, var(--pale-gold) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(184, 115, 51, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .floating-icons {
+            font-size: 5rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-tagline {
+            color: var(--warm-copper);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 4vw, 4.5rem);
+            color: var(--soft-white);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero h1 span {
+            color: var(--pale-gold);
+            font-style: italic;
+        }
+
+        .hero-description {
+            color: var(--misty-rose);
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            opacity: 0.9;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--warm-copper);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: #9a5a2a;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--pale-gold);
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid var(--pale-gold);
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--pale-gold);
+            color: var(--midnight-blue);
+        }
+
+        /* Services Section - Horizontal Cards */
+        .services {
+            padding: 6rem 2rem;
+            background: var(--soft-white);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-label {
+            color: var(--warm-copper);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--midnight-blue);
+            margin-bottom: 1rem;
+        }
+
+        .services-scroll {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scroll-snap-type: x mandatory;
+        }
+
+        .service-card {
+            min-width: 320px;
+            background: white;
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(26, 42, 58, 0.08);
+            scroll-snap-align: start;
+            transition: all 0.3s;
+            border-top: 4px solid var(--warm-copper);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(26, 42, 58, 0.12);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--midnight-blue);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Calculator Section - Split Layout */
+        .calculator-section {
+            background: linear-gradient(180deg, var(--misty-rose) 0%, var(--soft-white) 100%);
+            padding: 6rem 2rem;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .calculator-info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--midnight-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .calculator-info p {
+            color: #555;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--charcoal);
+        }
+
+        .feature-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--warm-copper);
+        }
+
+        .calculator-preview {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(26, 42, 58, 0.1);
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .preview-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--warm-copper), var(--soft-lavender));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .preview-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .preview-bubble {
+            padding: 1rem 1.25rem;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            max-width: 80%;
+        }
+
+        .preview-bubble.bot {
+            background: #f5f5f5;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .preview-bubble.user {
+            background: var(--midnight-blue);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: var(--midnight-blue);
+        }
+
+        .testimonials .section-title {
+            color: var(--soft-white);
+        }
+
+        .testimonials .section-label {
+            color: var(--pale-gold);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            color: var(--misty-rose);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            color: var(--pale-gold);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f1920;
+            color: var(--misty-rose);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--pale-gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col h4 {
+            color: var(--soft-white);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            color: var(--misty-rose);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--warm-copper);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Chat Widget - Bottom Left */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 400px;
+            max-height: 650px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .chat-widget.minimized {
+            height: 60px;
+            max-height: 60px;
+            cursor: pointer;
+        }
+
+        .chat-widget.minimized .chat-body,
+        .chat-widget.minimized .chat-input {
+            display: none;
+        }
+
+        .chat-header {
+            background: var(--midnight-blue);
+            color: white;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chat-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--warm-copper);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .chat-header-text h3 {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .chat-header-text p {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .chat-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .chat-control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.25rem;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 0.875rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.bot {
+            background: white;
+            color: var(--charcoal);
+            align-self: flex-start;
+            border: 1px solid #e0e0e0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            background: var(--midnight-blue);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.typing {
+            background: white;
+            padding: 0.875rem 1.25rem;
+            display: flex;
+            gap: 0.3rem;
+            align-items: center;
+            width: fit-content;
+            border: 1px solid #e0e0e0;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--warm-copper);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-6px); }
+        }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .quick-reply {
+            background: white;
+            border: 1px solid var(--midnight-blue);
+            color: var(--midnight-blue);
+            padding: 0.5rem 0.875rem;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .quick-reply:hover {
+            background: var(--midnight-blue);
+            color: white;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 0.625rem 1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .chat-input input:focus {
+            border-color: var(--midnight-blue);
+        }
+
+        .send-btn {
+            background: var(--midnight-blue);
+            color: white;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .send-btn:hover {
+            background: var(--warm-copper);
+        }
+
+        /* Pricing Card */
+        .pricing-card {
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, #243442 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 0.5rem;
+            color: white;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .pricing-header h4 {
+            color: var(--pale-gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .price-breakdown {
+            list-style: none;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+
+        .price-breakdown li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .price-breakdown li:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-label {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .breakdown-value {
+            color: var(--pale-gold);
+            font-weight: 500;
+        }
+
+        .pricing-note {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 968px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                min-height: 300px;
+            }
+
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .chat-widget {
+                width: calc(100% - 2rem);
+                left: 1rem;
+                right: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span>🌙</span>
+                <span>Everlasting Tails</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-tagline">Honoring Every Journey</p>
+            <h1>A Peaceful Farewell for Your <span>Beloved Companion</span></h1>
+            <p class="hero-description">We provide dignified, transparent pet cremation services guided by compassion. Our AI assistant helps you understand options and receive an accurate quote in minutes.</p>
+            <div class="cta-group">
+                <button class="btn-primary" onclick="openChat()">Calculate Estimate</button>
+                <button class="btn-secondary" onclick="openChat()">Speak with Luna</button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-icons">🐾 ✨ 🌙</div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <p class="section-label">Our Services</p>
+            <h2 class="section-title">Thoughtful Memorial Options</h2>
+        </div>
+        <div class="services-scroll">
+            <div class="service-card">
+                <div class="service-icon">🔥</div>
+                <h3>Private Cremation</h3>
+                <p>Your pet is cremated individually with guaranteed return of ashes. Our most selected option for families seeking certainty and peace of mind.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌿</div>
+                <h3>Aquamation</h3>
+                <p>Water-based cremation that's gentle on the environment. Uses 90% less energy than flame cremation with the same dignified results.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🕊️</div>
+                <h3>Communal Memorial</h3>
+                <p>A respectful, affordable option where ashes are scattered in our memorial gardens. Includes a commemorative plaque.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💎</div>
+                <h3>Memorial Jewelry</h3>
+                <p>Keep your companion close with custom pendants, rings, and bracelets designed to hold a small portion of ashes securely.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌳</div>
+                <h3>Tree Memorial</h3>
+                <p>Biodegradable urns that transform into living trees. Choose from oak, maple, or dogwood to create a lasting living tribute.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="calculator-section" id="pricing">
+        <div class="calculator-container">
+            <div class="calculator-info">
+                <h2>Instant, Transparent Pricing</h2>
+                <p>Our intelligent estimator considers your location, timing, and preferences to provide an accurate quote in seconds. No hidden fees, no surprises.</p>
+                <ul class="feature-list">
+                    <li>Real-time distance calculation</li>
+                    <li>Weight-based chamber sizing</li>
+                    <li>After-hours service options</li>
+                    <li>Customizable memorial packages</li>
+                    <li>Price lock for 30 days</li>
+                </ul>
+                <button class="btn-primary" onclick="openChat()" style="margin-top: 1.5rem;">Get Your Quote</button>
+            </div>
+            <div class="calculator-preview">
+                <div class="preview-header">
+                    <div class="preview-avatar">🌙</div>
+                    <div>
+                        <h4 style="color: var(--midnight-blue);">Luna</h4>
+                        <p style="font-size: 0.85rem; color: #666;">Memorial Guide</p>
+                    </div>
+                </div>
+                <div class="preview-messages">
+                    <div class="preview-bubble bot">Hello, I'm Luna. I'm here to help you understand our services and provide a clear estimate. How may I assist you today?</div>
+                    <div class="preview-bubble user">I need a quote for my dog</div>
+                    <div class="preview-bubble bot">Of course. To give you an accurate estimate, could you tell me your dog's approximate weight?</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="section-header">
+            <p class="section-label">Words of Comfort</p>
+            <h2 class="section-title">Families We've Served</h2>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"Luna guided us through every option with such patience. The pricing was exactly as quoted—no surprises during an already difficult time."</p>
+                <div class="testimonial-author">— Sarah M., Portland</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"The aquamation option was perfect for our family. The estimate was instant and the final cost matched perfectly. Highly recommend."</p>
+                <div class="testimonial-author">— James K., Seattle</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"Having the chatbot available at 2 AM when we needed help meant everything. The quote feature gave us clarity immediately."</p>
+                <div class="testimonial-author">— The Chen Family, Austin</div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">🌙 Everlasting Tails</div>
+                <p style="color: var(--misty-rose); line-height: 1.7;">Providing dignified, transparent pet memorial services with compassion and care. Available 24/7 for families in need.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Private Cremation</a></li>
+                    <li><a href="#">Aquamation</a></li>
+                    <li><a href="#">Communal Memorial</a></li>
+                    <li><a href="#">Memorial Products</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Grief Resources</a></li>
+                    <li><a href="#">Pricing Guide</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">24/7 Hotline</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li>📞 1-888-TAIL-LOVE</li>
+                    <li>📧 hello@everlastingtails.com</li>
+                    <li>💬 Chat with Luna</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Everlasting Tails. This is a demo prototype.</p>
+        </div>
+    </footer>
+
+    <div class="chat-widget minimized" id="chatWidget">
+        <div class="chat-header" onclick="toggleChat()">
+            <div class="chat-header-left">
+                <div class="chat-avatar">🌙</div>
+                <div class="chat-header-text">
+                    <h3>Luna</h3>
+                    <p>Memorial Guide</p>
+                </div>
+            </div>
+            <div class="chat-controls">
+                <button class="chat-control-btn" onclick="event.stopPropagation(); toggleChat()">−</button>
+            </div>
+        </div>
+        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendMessage()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let chatState = {
+            step: 'welcome',
+            data: {
+                petWeight: null,
+                postcode: null,
+                distance: null,
+                timeOfDay: null,
+                cremationType: null,
+                urnChoice: null,
+                addOns: []
+            }
+        };
+
+        const pricingEngine = {
+            getBaseCost: (weight, type) => {
+                const tiers = [
+                    { max: 10, private: 165, individual: 110, communal: 65, aquamation: 180 },
+                    { max: 30, private: 220, individual: 155, communal: 90, aquamation: 240 },
+                    { max: 60, private: 310, individual: 210, communal: 125, aquamation: 340 },
+                    { max: 100, private: 420, individual: 285, communal: 170, aquamation: 460 },
+                    { max: 150, private: 530, individual: 360, communal: 215, aquamation: 580 },
+                    { max: Infinity, private: 660, individual: 440, communal: 275, aquamation: 720 }
+                ];
+                const tier = tiers.find(t => weight <= t.max) || tiers[tiers.length - 1];
+                return tier[type] || tier.private;
+            },
+
+            getDistanceCost: (distance) => {
+                if (distance <= 15) return 0;
+                if (distance <= 30) return 55;
+                if (distance <= 60) return 95;
+                return 95 + (distance - 60) * 1.75;
+            },
+
+            getTimeSurcharge: (time) => {
+                const rates = {
+                    'standard': 0,
+                    'evening': 95,
+                    'weekend': 75,
+                    'holiday': 175,
+                    'rush': 250
+                };
+                return rates[time] || 0;
+            },
+
+            getUrnCost: (choice) => {
+                const urns = {
+                    'simple': 0,
+                    'wood': 85,
+                    'ceramic': 135,
+                    'biodegradable': 55,
+                    'marble': 250,
+                    'glass': 180,
+                    'pendant': 175
+                };
+                return urns[choice] || 0;
+            },
+
+            getAddOnCost: (addOn) => {
+                const items = {
+                    'paw-impression': 40,
+                    'fur-locket': 30,
+                    'attended': 125,
+                    'priority': 95,
+                    'home-pickup': 65,
+                    'tribute-box': 100,
+                    'engraved-plate': 50,
+                    'tree-urn': 120
+                };
+                return items[addOn] || 0;
+            },
+
+            calculate: (data) => {
+                const breakdown = [];
+
+                const baseCost = pricingEngine.getBaseCost(data.petWeight, data.cremationType);
+                const typeLabels = {
+                    'private': 'Private Cremation',
+                    'individual': 'Individual Cremation',
+                    'communal': 'Communal Memorial',
+                    'aquamation': 'Aquamation (Water Cremation)'
+                };
+                breakdown.push({ label: typeLabels[data.cremationType], value: baseCost });
+
+                if (data.distance > 15) {
+                    const distCost = pricingEngine.getDistanceCost(data.distance);
+                    breakdown.push({ label: `Transportation (${data.distance} miles)`, value: distCost });
+                }
+
+                const timeCost = pricingEngine.getTimeSurcharge(data.timeOfDay);
+                if (timeCost > 0) {
+                    const timeLabels = {
+                        'evening': 'Evening Service (6pm-10pm)',
+                        'weekend': 'Weekend Service',
+                        'holiday': 'Holiday Service',
+                        'rush': 'Rush/Express Service'
+                    };
+                    breakdown.push({ label: timeLabels[data.timeOfDay], value: timeCost });
+                }
+
+                const urnCost = pricingEngine.getUrnCost(data.urnChoice);
+                if (urnCost > 0) {
+                    const urnLabels = {
+                        'wood': 'Artisan Wood Urn',
+                        'ceramic': 'Handcrafted Ceramic Urn',
+                        'biodegradable': 'Biodegradable Tree Urn',
+                        'marble': 'Marble Memorial Urn',
+                        'glass': 'Blown Glass Memorial',
+                        'pendant': 'Cremation Pendant'
+                    };
+                    breakdown.push({ label: urnLabels[data.urnChoice], value: urnCost });
+                }
+
+                data.addOns.forEach(addOn => {
+                    const cost = pricingEngine.getAddOnCost(addOn);
+                    const labels = {
+                        'paw-impression': 'Clay Paw Impression',
+                        'fur-locket': 'Fur Keepsake Locket',
+                        'attended': 'Attended Cremation Service',
+                        'priority': 'Priority 24-Hour Processing',
+                        'home-pickup': 'Home Collection',
+                        'tribute-box': 'Memorial Tribute Box',
+                        'engraved-plate': 'Engraved Name Plate',
+                        'tree-urn': 'Living Tree Memorial Urn'
+                    };
+                    breakdown.push({ label: labels[addOn], value: cost });
+                });
+
+                const total = breakdown.reduce((sum, item) => sum + item.value, 0);
+                return { total, breakdown };
+            }
+        };
+
+        const conversationFlow = {
+            welcome: {
+                message: "Welcome. I'm Luna, your memorial guide. I'm truly sorry you're facing this loss. I'm here to provide clarity and support as you consider your options. Would you like me to prepare an estimate for you?",
+                quickReplies: ["Yes, please", "Tell me about services first", "I have questions"],
+                next: 'pet_weight'
+            },
+            pet_weight: {
+                message: "I'll need to know your pet's weight to calculate the appropriate service costs. This ensures we use the correct chamber size and resources.\n\nWhat is your pet's approximate weight?",
+                quickReplies: ["Under 10 lbs", "10-30 lbs", "30-60 lbs", "60-100 lbs", "100-150 lbs", "Over 150 lbs"],
+                input: true,
+                field: 'petWeight',
+                validator: (val) => {
+                    const num = parseFloat(val);
+                    return !isNaN(num) && num > 0 && num < 1000;
+                },
+                next: 'location'
+            },
+            location: {
+                message: "What is your ZIP code or postal code? This helps me calculate transportation costs from your location to our nearest facility.",
+                quickReplies: null,
+                input: true,
+                field: 'postcode',
+                validator: (val) => val.length >= 3,
+                next: 'distance'
+            },
+            distance: {
+                message: "How far are you from our service center?\n\n• 0-15 miles: Complimentary\n• 15-30 miles: $55\n• 30-60 miles: $95\n• 60+ miles: $95 + $1.75/mile",
+                quickReplies: ["Within 15 miles", "15-30 miles", "30-60 miles", "Over 60 miles", "Not sure"],
+                input: true,
+                field: 'distance',
+                validator: (val) => !isNaN(parseFloat(val)) || val.toLowerCase().includes('not sure'),
+                next: 'timing'
+            },
+            timing: {
+                message: "When do you need our services?\n\n• Standard hours (Mon-Fri, 8am-6pm): No additional charge\n• Evening (6pm-10pm): +$95\n• Weekend: +$75\n• Holiday: +$175\n• Rush/Express (same day): +$250",
+                quickReplies: ["Standard hours", "Evening", "Weekend", "Holiday", "Rush/Express"],
+                input: true,
+                field: 'timeOfDay',
+                validator: null,
+                next: 'service_type'
+            },
+            service_type: {
+                message: "Which memorial service would you prefer?\n\n🔥 **Private Cremation** - Your pet alone, ashes returned. Most certain.\n\n💧 **Aquamation** - Water-based, eco-friendly. 90% less energy.\n\n🌸 **Communal** - With other pets, ashes not returned. Scattered in gardens.\n\n🕊️ **Individual** - Partitioned cremation, ashes returned.",
+                quickReplies: ["Private Cremation", "Aquamation", "Communal Memorial", "Individual Cremation"],
+                input: true,
+                field: 'cremationType',
+                validator: null,
+                next: 'vessel'
+            },
+            vessel: {
+                message: "How would you like to receive or memorialize the ashes?\n\n• Simple container (included)\n• Artisan wood urn (+$85)\n• Handcrafted ceramic (+$135)\n• Biodegradable tree urn (+$55)\n• Marble memorial (+$250)\n• Blown glass art piece (+$180)\n• Cremation pendant (+$175)",
+                quickReplies: ["Simple container", "Wood urn", "Ceramic urn", "Tree urn", "Marble", "Glass art", "Pendant"],
+                input: true,
+                field: 'urnChoice',
+                validator: null,
+                next: 'extras'
+            },
+            extras: {
+                message: "Would you like to add any memorial items? Select all that apply, then type 'done'.\n\n• Clay paw impression (+$40)\n• Fur keepsake locket (+$30)\n• Attended cremation (+$125)\n• Priority 24-hour processing (+$95)\n• Home collection (+$65)\n• Memorial tribute box (+$100)\n• Engraved plate (+$50)\n• Living tree urn (+$120)",
+                quickReplies: ["Paw impression", "Fur locket", "Attended", "Priority", "Home pickup", "Tribute box", "Engraving", "Done"],
+                input: true,
+                field: 'addOns',
+                multi: true,
+                validator: null,
+                next: 'calculate'
+            },
+            calculate: {
+                message: null,
+                quickReplies: ["New estimate", "Adjust details", "Speak with team"],
+                next: 'welcome'
+            }
+        };
+
+        function initChat() {
+            const chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML = '';
+            chatState.step = 'welcome';
+            chatState.data = {
+                petWeight: null,
+                postcode: null,
+                distance: null,
+                timeOfDay: null,
+                cremationType: null,
+                urnChoice: null,
+                addOns: []
+            };
+            showTyping(() => {
+                addBotMessage(conversationFlow.welcome.message, conversationFlow.welcome.quickReplies);
+            });
+        }
+
+        function showTyping(callback) {
+            const chatBody = document.getElementById('chatBody');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message typing';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+            chatBody.appendChild(typingDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            setTimeout(() => {
+                typingDiv.remove();
+                callback();
+            }, 1200);
+        }
+
+        function addBotMessage(text, quickReplies = null) {
+            const chatBody = document.getElementById('chatBody');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message bot';
+            msgDiv.style.whiteSpace = 'pre-line';
+            msgDiv.textContent = text;
+            chatBody.appendChild(msgDiv);
+
+            if (quickReplies && quickReplies.length > 0) {
+                const repliesDiv = document.createElement('div');
+                repliesDiv.className = 'quick-replies';
+                quickReplies.forEach(reply => {
+                    const btn = document.createElement('button');
+                    btn.className = 'quick-reply';
+                    btn.textContent = reply;
+                    btn.onclick = () => handleQuickReply(reply);
+                    repliesDiv.appendChild(btn);
+                });
+                chatBody.appendChild(repliesDiv);
+            }
+
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function addUserMessage(text) {
+            const chatBody = document.getElementById('chatBody');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message user';
+            msgDiv.textContent = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function handleQuickReply(reply) {
+            const replies = document.querySelectorAll('.quick-replies');
+            replies.forEach(r => r.remove());
+
+            addUserMessage(reply);
+
+            let value = reply;
+            if (chatState.step === 'pet_weight') {
+                const map = {
+                    'Under 10 lbs': 5,
+                    '10-30 lbs': 20,
+                    '30-60 lbs': 45,
+                    '60-100 lbs': 80,
+                    '100-150 lbs': 125,
+                    'Over 150 lbs': 175
+                };
+                value = map[reply] || parseFloat(reply);
+            } else if (chatState.step === 'distance') {
+                const map = {
+                    'Within 15 miles': 10,
+                    '15-30 miles': 22,
+                    '30-60 miles': 45,
+                    'Over 60 miles': 75,
+                    'Not sure': 25
+                };
+                value = map[reply] || parseFloat(reply);
+            } else if (chatState.step === 'timing') {
+                const map = {
+                    'Standard hours': 'standard',
+                    'Evening': 'evening',
+                    'Weekend': 'weekend',
+                    'Holiday': 'holiday',
+                    'Rush/Express': 'rush'
+                };
+                value = map[reply] || 'standard';
+            } else if (chatState.step === 'service_type') {
+                const map = {
+                    'Private Cremation': 'private',
+                    'Aquamation': 'aquamation',
+                    'Communal Memorial': 'communal',
+                    'Individual Cremation': 'individual'
+                };
+                value = map[reply] || 'private';
+            } else if (chatState.step === 'vessel') {
+                const map = {
+                    'Simple container': 'simple',
+                    'Wood urn': 'wood',
+                    'Ceramic urn': 'ceramic',
+                    'Tree urn': 'biodegradable',
+                    'Marble': 'marble',
+                    'Glass art': 'glass',
+                    'Pendant': 'pendant'
+                };
+                value = map[reply] || 'simple';
+            } else if (chatState.step === 'extras') {
+                const map = {
+                    'Paw impression': 'paw-impression',
+                    'Fur locket': 'fur-locket',
+                    'Attended': 'attended',
+                    'Priority': 'priority',
+                    'Home pickup': 'home-pickup',
+                    'Tribute box': 'tribute-box',
+                    'Engraving': 'engraved-plate',
+                    'Done': 'done'
+                };
+                value = map[reply] || reply;
+            }
+
+            processInput(value);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            input.value = '';
+            addUserMessage(text);
+            processInput(text);
+        }
+
+        function processInput(value) {
+            const currentStep = conversationFlow[chatState.step];
+
+            if (chatState.step === 'extras') {
+                if (value.toLowerCase() === 'done' || value.toLowerCase() === 'skip') {
+                    chatState.step = 'calculate';
+                    showPricing();
+                    return;
+                } else {
+                    const map = {
+                        'paw impression': 'paw-impression',
+                        'fur locket': 'fur-locket',
+                        'attended': 'attended',
+                        'priority': 'priority',
+                        'home pickup': 'home-pickup',
+                        'tribute box': 'tribute-box',
+                        'engraving': 'engraved-plate',
+                        'tree urn': 'tree-urn'
+                    };
+                    const addOn = map[value.toLowerCase()] || value;
+                    if (!chatState.data.addOns.includes(addOn)) {
+                        chatState.data.addOns.push(addOn);
+                    }
+
+                    showTyping(() => {
+                        addBotMessage(`Added: ${value}. Any other items? (Type 'done' when finished)`, conversationFlow.extras.quickReplies);
+                    });
+                    return;
+                }
+            }
+
+            if (currentStep.validator && !currentStep.validator(value)) {
+                showTyping(() => {
+                    addBotMessage("I didn't quite understand that. Could you try again? I'm here to help. 💙", currentStep.quickReplies);
+                });
+                return;
+            }
+
+            if (currentStep.field) {
+                chatState.data[currentStep.field] = value;
+            }
+
+            chatState.step = currentStep.next;
+
+            const nextStep = conversationFlow[chatState.step];
+            showTyping(() => {
+                if (chatState.step === 'calculate') {
+                    showPricing();
+                } else {
+                    addBotMessage(nextStep.message, nextStep.quickReplies);
+                }
+            });
+        }
+
+        function showPricing() {
+            const result = pricingEngine.calculate(chatState.data);
+
+            const chatBody = document.getElementById('chatBody');
+
+            const pricingDiv = document.createElement('div');
+            pricingDiv.className = 'message bot';
+            pricingDiv.innerHTML = `
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h4>Your Memorial Estimate</h4>
+                        <div class="total-price">$${result.total}</div>
+                        <p style="font-size: 0.8rem; opacity: 0.8;">Estimated Total</p>
+                    </div>
+                    <ul class="price-breakdown">
+                        ${result.breakdown.map(item => `
+                            <li>
+                                <span class="breakdown-label">${item.label}</span>
+                                <span class="breakdown-value">$${item.value}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                    <p class="pricing-note">
+                        This estimate is valid for 30 days. Final pricing confirmed at arrangement.
+                    </p>
+                </div>
+            `;
+            chatBody.appendChild(pricingDiv);
+
+            const followUp = document.createElement('div');
+            followUp.className = 'message bot';
+            followUp.textContent = "Would you like to start a new estimate, adjust any details, or connect with our care team?";
+            chatBody.appendChild(followUp);
+
+            const repliesDiv = document.createElement('div');
+            repliesDiv.className = 'quick-replies';
+            ["New estimate", "Adjust details", "Speak with team"].forEach(reply => {
+                const btn = document.createElement('button');
+                btn.className = 'quick-reply';
+                btn.textContent = reply;
+                btn.onclick = () => {
+                    if (reply === 'New estimate') {
+                        initChat();
+                    } else if (reply === 'Adjust details') {
+                        chatState.step = 'pet_weight';
+                        showTyping(() => {
+                            addBotMessage(conversationFlow.pet_weight.message, conversationFlow.pet_weight.quickReplies);
+                        });
+                    } else {
+                        addUserMessage("Speak with team");
+                        showTyping(() => {
+                            addBotMessage("A member of our care team will reach out within 10 minutes. You may also call us directly at 1-888-TAIL-LOVE. 🌙", null);
+                        });
+                    }
+                };
+                repliesDiv.appendChild(btn);
+            });
+            chatBody.appendChild(repliesDiv);
+
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function toggleChat() {
+            const widget = document.getElementById('chatWidget');
+            widget.classList.toggle('minimized');
+        }
+
+        function openChat() {
+            const widget = document.getElementById('chatWidget');
+            widget.classList.remove('minimized');
+            document.getElementById('userInput').focus();
+        }
+
+        window.onload = initChat;
+    </script>
+</body>
+</html>
